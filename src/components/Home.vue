@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import DiceBoard from "./DiceBoard.vue";
+import Skill from "./Skill.vue";
 
 // defineProps({
 //   msg: String,
@@ -73,7 +74,7 @@ function calculateModifier(score) {
 
 const proficiencyBonus = ref(2);
 
-const skills = [
+const skillArray = [
   {
     _id: "619dffba488d28fdd03ee5b6",
     id: 1,
@@ -306,11 +307,17 @@ function isStatProficient(statName) {
       </div>
 
       <!-- skills -->
-      <div class="section skills">
+      <!--<Skill is meant for component-->
+      <!--skills meant the reqired prop from skill comp  -->
+      <!-- skillArray meant the variable in the script section-->
+      <Skill :skills="skillArray" />
+
+      
+      <!-- <div class="section skills">
         <div class="skill" v-for="skill in skills" :key="skill.skillname">
           <div>{{ skill.skillname }}</div>
         </div>
-      </div>
+      </div> -->
 
       <!-- player status -->
       <div class="section player-status">
