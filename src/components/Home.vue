@@ -1,10 +1,14 @@
 <script setup>
+import {reactive} from "vue"
+
 import DiceBoard from "./DiceBoard.vue";
 import Skill from "./Skill.vue";
 import PlayerInfo from "./PlayerInfo.vue";
 import AbilityScores from "./AbilityScores.vue";
 import SavingThrow from "./SavingThrow.vue";
 import HpBox from "./HpBox.vue"
+import AcInitMove from "./AcInitMove.vue";
+
 
 // defineProps({
 //   msg: String,
@@ -15,7 +19,7 @@ import HpBox from "./HpBox.vue"
 
 
 
-let player = {
+let player = reactive({
   id: 2,
   name: "adramaliik",
   level: 1,
@@ -45,7 +49,7 @@ let player = {
   maxHp: 10,
   skillProficency: [1, 2, 3, 4],
   feats: [],
-};
+});
 
 
 const stats = [
@@ -245,19 +249,17 @@ const dices = [
   },
 ];
 
-function test(){
-  let tempo = player;
-  tempo.level ++;
-  player = {...tempo};
-  console.log("pressed");
+function lvUp(){
+  player.level ++;
 }
 </script>
 
 <template>
-<button @click="test()">press me</button>
+
     <div class="row">
        <!-- player general info -->
-      <PlayerInfo :player="player"/>
+       <!-- when the event levelupevent is emitted from player info component, run the function lvUp-->
+      <PlayerInfo :player="player" @levelUpEvent="lvUp()"/>
     </div>
     <div class="row">
       <div class="col">
@@ -277,6 +279,8 @@ function test(){
       <!-- skillArray meant the variable in the script section-->
       </div>
       <div class="col">
+      <!-- player movement -->
+      <AcInitMove/>
       <!-- player HP -->
       <HpBox :player ="player"/>
       </div>

@@ -2,10 +2,14 @@
 import { ref } from "vue";
 const proficiencyBonus = ref(2);
 const props = defineProps({
-        player:{
+        player: {
             type: Object,
-        },
+        }
     });
+// this is for leveling up
+// it can be used many time defineEmits(["","",...])
+const emit = defineEmits(["levelUpEvent"])
+
 </script>
 
 <template>
@@ -13,6 +17,7 @@ const props = defineProps({
         <div class="section player-name">
             Character Name: {{ player.name }} <span>#{{ player.id }}</span>
         </div>
+        <button @click='emit("levelUpEvent")'>press me</button>
     </div>
 
     <div class="col-8">
