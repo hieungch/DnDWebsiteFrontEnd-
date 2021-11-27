@@ -11,6 +11,7 @@
 
 <template>
     <div class="section skills">
+        <h2>Skills</h2>
         <div class="skill" v-for="skill in skills" :key="skill.skillname">
           <div>{{ skill.skillname }}</div>
         </div>

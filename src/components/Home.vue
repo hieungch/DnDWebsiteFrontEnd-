@@ -1,15 +1,21 @@
 <script setup>
-import { ref } from "vue";
 import DiceBoard from "./DiceBoard.vue";
 import Skill from "./Skill.vue";
+import PlayerInfo from "./PlayerInfo.vue";
+import AbilityScores from "./AbilityScores.vue";
+import SavingThrow from "./SavingThrow.vue";
+import HpBox from "./HpBox.vue"
 
 // defineProps({
 //   msg: String,
 //   msg2: String,
 // });
 
-const count = ref(0);
-const player = {
+
+
+
+
+let player = {
   id: 2,
   name: "adramaliik",
   level: 1,
@@ -41,6 +47,7 @@ const player = {
   feats: [],
 };
 
+
 const stats = [
   {
     name: "strenth",
@@ -67,12 +74,6 @@ const stats = [
     value: player.charisma,
   },
 ];
-
-function calculateModifier(score) {
-  return Math.floor((score - 10) / 2);
-}
-
-const proficiencyBonus = ref(2);
 
 const skillArray = [
   {
@@ -244,89 +245,49 @@ const dices = [
   },
 ];
 
-function isStatProficient(statName) {
-  return statName === "dexterity";
+function test(){
+  let tempo = player;
+  tempo.level ++;
+  player = {...tempo};
+  console.log("pressed");
 }
 </script>
 
 <template>
-  <!-- title -->
-  <h1>Dnd Project</h1>
-  <div class="row">
-    <div class="col col-1">
-      <DiceBoard :diceType="{ minPoint: 2, maxPoint: 5 }" :quantity="5" />
+<button @click="test()">press me</button>
+    <div class="row">
+       <!-- player general info -->
+      <PlayerInfo :player="player"/>
     </div>
-    <div class="col col 10">
-      <!-- player name & id-->
-      <div class="section player-name">
-        {{ player.name }} <span>#{{ player.id }}</span>
-      </div>
-
-      <!-- player general info -->
-      <div class="section player-general-info">
-        <div class="class-adn-lvl">
-          class : Lvl {{ player.level }} {{ player.characterClass.className }}
-        </div>
-        <div class="player-race">race : Human</div>
-        <div class="player-background">background : sage</div>
-      </div>
-
+    <div class="row">
+      <div class="col">
       <!-- basic stats -->
-      <div class="section basic-stats">
-        <div class="stat" v-for="stat in stats" :key="stat.name">
-          {{ stat.name }}: {{ stat.value }} ({{
-            calculateModifier(stat.value)
-          }})
-        </div>
-      </div>
-
-      <!-- proficiency -->
-      <div class="section proficiency">
-        <div class="inspiration">Inspiration: 0</div>
-        <div class="proficiency-bonus">
-          poficiency bonnus: {{ proficiencyBonus }}
-        </div>
-      </div>
+      <AbilityScores :statScore="stats"/>
 
       <!-- saving throw -->
-      <div class="section saving-throws">
-        <div class="saving-thows-item" v-for="stat in stats" :key="stat.name">
-          <input
-            type="checkbox"
-            :name="'cbk' + stat.name"
-            :checked="isStatProficient(stat.name)"
-          />
-          <span>
-            +{{
-              calculateModifier(stat.value) +
-              (isStatProficient(stat.name) ? proficiencyBonus : 0)
-            }}
-            {{ stat.name }}</span
-          >
-        </div>
-      </div>
+      <SavingThrow :savesScore = "stats" />
 
-      <!-- skills -->
+      
+      </div>
+      <div class="col">
+        <!-- skills -->
+      <Skill :skills="skillArray" />
       <!--<Skill is meant for component-->
       <!--skills meant the reqired prop from skill comp  -->
       <!-- skillArray meant the variable in the script section-->
-      <Skill :skills="skillArray" />
-
-      
-      <!-- <div class="section skills">
-        <div class="skill" v-for="skill in skills" :key="skill.skillname">
-          <div>{{ skill.skillname }}</div>
-        </div>
-      </div> -->
-
-      <!-- player status -->
-      <div class="section player-status">
-        <div class="hp">hp = {{ player.hp }}</div>
-        <div class="maxhp">maxhp = {{ player.hp }}</div>
-        <div class="hit-dice">hitdice = {{ "todo" }}</div>
+      </div>
+      <div class="col">
+      <!-- player HP -->
+      <HpBox :player ="player"/>
+      </div>
+      <div class="col">
+      <h2>inventory</h2>
       </div>
     </div>
-  </div>
+    <!-- <div class="col col-1">
+      <DiceBoard :diceType="{ minPoint: 2, maxPoint: 5 }" :quantity="5" />
+    </div> -->
+
 </template>
 
 <style scoped>
