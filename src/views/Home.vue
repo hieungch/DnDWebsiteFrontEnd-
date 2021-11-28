@@ -1,19 +1,17 @@
 <script setup>
 import {reactive} from "vue"
-import { ref } from "vue";
 
-import DiceBoard from "./DiceBoard.vue";
 import CharacterSheet from "../mock/characterSheet.json";
-import Skill from "./Skill.vue";
-import PlayerInfo from "./PlayerInfo.vue";
-import AbilityScores from "./AbilityScores.vue";
-import SavingThrow from "./SavingThrow.vue";
-import HpBox from "./HpBox.vue"
-import AcInitMove from "./AcInitMove.vue";
-import Abilities from "./Abilities.vue";
-import Feats from "./feats.vue";
-import Inventory from "./Inventory.vue";
-import Proficienies from "./Proficienies.vue";
+import Skill from "../components/Skill.vue";
+import PlayerInfo from "../components/PlayerInfo.vue";
+import AbilityScores from "../components/AbilityScores.vue";
+import SavingThrow from "../components/SavingThrow.vue";
+import HpBox from "../components/HpBox.vue"
+import AcInitMove from "../components/AcInitMove.vue";
+import Abilities from "../components/Abilities.vue";
+import Feats from "../components/feats.vue";
+import Inventory from "../components/Inventory.vue";
+import Proficienies from "../components/Proficienies.vue";
 
 let player = reactive(CharacterSheet);
 
