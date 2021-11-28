@@ -1,0 +1,77 @@
+{
+    "_id": "61a3a82d06e2a225ac042c7a",
+    "id": 2,
+    "name": "adramaliik",
+    "level": 1,
+    "inspiration": 0,
+    "strength": 20,
+    "dexterity": 15,
+    "constitution": 11,
+    "intelligent": 12,
+    "wisdom": 13,
+    "charisma": 10,
+    "background": {
+        "_id": "61a3a82d06e2a225ac042c6b",
+        "id": 2,
+        "name": "Acolyte",
+        "description": "You have spent your life in the service of a temple to a specific god or pantheon of gods. You act as an intermediary between the realm of the holy and the mortal world, perform ing sacred rites and offering sacrifices in order to conduct w orshipers into the presence of the divine. You are not necessarily a cleric-performing sacred rites is not the same thing as channeling divine power",
+        "languages": "two of choice",
+        "equipment": "A holy sym bol (a gift to you w hen you entered the priesthood), a prayer book or prayer wheel, 5 sticks of incense, vestments, a set of common clothes, and a belt pouch containing 15 gp",
+        "toolprof": "none",
+        "skillprof": [
+            7,
+            15
+        ],
+        "__v": 0
+    },
+    "race": {
+        "_id": "61a3a82d06e2a225ac042cae",
+        "id": 2,
+        "name": "Elf",
+        "alignment": "Elves love freedom , variety, and self-expression, so they lean strongly toward the gentler aspects of chaos. They value and protect others' freedom as well as their own, and they are more often good than not",
+        "size": "Elves range from under 5 to over 6 feet tall and have slender builds. Your size is Medium.",
+        "speed": "Your base walking speed is 30 feet",
+        "languages": "You can speak, read, and write Com m on and Elvish. Elvish is fluid, with subtle intonations and intricate grammar. Elven literature is rich and varied, and their songs and poem s are fam ous am ong other races.",
+        "__v": 0
+    },
+    "characterClass": {
+        "_id": "61a3a82d06e2a225ac042c75",
+        "id": 5,
+        "className": "Divination wizard",
+        "profArmor": "None",
+        "profWeapon": "Daggers,darts,slings,quarterstaff,light crossbow",
+        "proftools": "None",
+        "profSavingThrow": [
+            "intelligent",
+            "wisdom"
+        ],
+        "hitDiceType": "d6",
+        "profSkill": [
+            2,
+            6,
+            7,
+            9,
+            11,
+            15
+        ],
+        "specialStat": 0,
+        "ability": [
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31
+        ],
+        "__v": 0
+    },
+    "hp": 10,
+    "maxHp": 10,
+    "skillProficency": [
+        1,
+        2
+    ],
+    "feats": [],
+    "__v": 0
+}

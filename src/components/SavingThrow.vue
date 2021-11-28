@@ -1,7 +1,6 @@
 <script setup>
-import { ref } from "vue";
-import {calculateModifier} from "../lib/dndCalculation.js"
-import {isStatProficient} from "../lib/dndCalculation.js"
+
+import {calculateModifier, calculateProficiency} from "../lib/dndCalculation.js"
 const props = defineProps({
         savesScore:{
             type: Array,
@@ -9,8 +8,9 @@ const props = defineProps({
                 return [];
             },
         },
+        player: Object,
     });
-    const proficiencyBonus = ref(2);
+
 </script>
 
 <template>
@@ -21,7 +21,7 @@ const props = defineProps({
             <input
             type="checkbox"
             :name="'cbk' + stat.name"
-            :checked="isStatProficient(stat.name)"/>
+            :checked="player.characterClass.profSavingThrow.includes(stat.name)"/>
           </div>
 
           <div class="col">
@@ -29,7 +29,7 @@ const props = defineProps({
             {{ stat.name }} |->
             {{
               calculateModifier(stat.value) +
-              (isStatProficient(stat.name) ? proficiencyBonus : 0)
+              (player.characterClass.profSavingThrow.includes(stat.name) ? calculateProficiency(player.level) : 0)
             }} 
           </span>
           </div>

@@ -1,7 +1,9 @@
 <script setup>
 import {reactive} from "vue"
+import { ref } from "vue";
 
 import DiceBoard from "./DiceBoard.vue";
+import CharacterSheet from "../mock/characterSheet.json";
 import Skill from "./Skill.vue";
 import PlayerInfo from "./PlayerInfo.vue";
 import AbilityScores from "./AbilityScores.vue";
@@ -13,47 +15,7 @@ import Feats from "./feats.vue";
 import Inventory from "./Inventory.vue";
 import Proficienies from "./Proficienies.vue";
 
-
-// defineProps({
-//   msg: String,
-//   msg2: String,
-// });
-
-
-
-
-
-let player = reactive({
-  id: 2,
-  name: "adramaliik",
-  level: 1,
-  inspiration: 0,
-  strength: 20,
-  dexterity: 15,
-  constitution: 11,
-  intelligent: 12,
-  wisdom: 13,
-  charisma: 8,
-  background: 2,
-  race: 2,
-  characterClass: {
-    _id: "619f5c8e488d28fdd03f0611",
-    id: 5,
-    className: "Divination wizard",
-    profArmor: "None",
-    profWeapon: "Daggers,darts,slings,quarterstaff,light crossbow",
-    proftools: "None",
-    profSavingThrow: ["intelligent", "wisdom"],
-    hitDiceType: "d6",
-    profSkill: [2, 6, 7, 9, 11, 15],
-    specialStat: 0,
-    ability: [25, 26, 27, 28, 29, 30, 31],
-  },
-  hp: 10,
-  maxHp: 10,
-  skillProficency: [1, 2, 3, 4],
-  feats: [],
-});
+let player = reactive(CharacterSheet);
 
 
 const stats = [
@@ -70,7 +32,7 @@ const stats = [
     value: player.constitution,
   },
   {
-    name: "inteligence",
+    name: "intelligent",
     value: player.intelligent,
   },
   {
@@ -118,7 +80,7 @@ const skillArray = [
     _id: "619e0283488d28fdd03ee6ae",
     id: 6,
     skillname: "History",
-    statModifier: "inteligence",
+    statModifier: "intelligent",
   },
   {
     _id: "619e0283488d28fdd03ee6b1",
@@ -136,7 +98,7 @@ const skillArray = [
     _id: "619e0283488d28fdd03ee6b7",
     id: 9,
     skillname: "Intvestigation",
-    statModifier: "inteligence",
+    statModifier: "intelligent",
   },
   {
     _id: "619e0283488d28fdd03ee6ba",
@@ -148,7 +110,7 @@ const skillArray = [
     _id: "619e0283488d28fdd03ee6bd",
     id: 11,
     skillname: "Nature",
-    statModifier: "inteligence",
+    statModifier: "intelligent",
   },
   {
     _id: "619e0283488d28fdd03ee6c0",
@@ -172,7 +134,7 @@ const skillArray = [
     _id: "619e0283488d28fdd03ee6c9",
     id: 15,
     skillname: "Religion",
-    statModifier: "inteligence",
+    statModifier: "intelligent",
   },
   {
     _id: "619e0283488d28fdd03ee6cc",
@@ -261,18 +223,17 @@ function lvUp(){
 <template>
 
     <div class="row">
-       <!-- player general info -->
        <!-- when the event levelupevent is emitted from player info component, run the function lvUp-->
       <PlayerInfo :player="player" @levelUpEvent="lvUp()"/>
     </div>
     <div class="row">
       <div class="col-3">
       <AbilityScores :statScore="stats"/>
-      <SavingThrow :savesScore = "stats" />
+      <SavingThrow :player ="player" :savesScore = "stats" />
       </div>
 
       <div class="col-3">
-      <Skill :skills="skillArray" />
+      <Skill :player="player" :skills="skillArray" />
       <!--<Skill is meant for component-->
       <!--skills meant the reqired prop from skill comp  -->
       <!-- skillArray meant the variable in the script section-->

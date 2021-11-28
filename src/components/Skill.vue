@@ -1,4 +1,5 @@
 <script setup>
+import {calculateModifier,calculateProficiency} from "../lib/dndCalculation.js"
     const props = defineProps({
         skills: {
             type: Array,
@@ -6,17 +7,30 @@
                 return [];
             },
         },
+        player: Object
     });
+    function getSkillProfs(){
+        const result = [
+        // the ... meant to take all the data within player. and but it into a array
+            ...props.player.skillProficency,
+            ...props.player.background.skillprof
+        ];
+        // console.log("rs=", result);
+        return result;
+    }
 </script>
 
 <template>
     <div class="skill-field">
         <div class="row skill-box" v-for="skill in skills" :key="skill.skillname">
             <div class="col-1">
-                <input type="checkbox"/>
+                <input type="checkbox"
+                :checked="getSkillProfs().includes(skill.id)"/>
             </div>
             <div class="col">
-                {{ skill.skillname }} |->
+                {{ skill.skillname }} ({{skill.statModifier}}) |->
+                {{calculateModifier(player[skill.statModifier]) + 
+                (getSkillProfs().includes(skill.id) ? calculateProficiency(player.level) : 0) }} 
             </div>
         </div>
     </div>

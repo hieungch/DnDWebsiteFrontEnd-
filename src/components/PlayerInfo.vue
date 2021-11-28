@@ -1,10 +1,7 @@
 <script setup>
-import { ref } from "vue";
-const proficiencyBonus = ref(2);
+import {calculateProficiency} from "../lib/dndCalculation.js"
 const props = defineProps({
-        player: {
-            type: Object,
-        }
+        player: Object,
     });
 // this is for leveling up
 // it can be used many time defineEmits(["","",...])
@@ -47,7 +44,7 @@ const emit = defineEmits(["levelUpEvent"])
                 </div>
                 <div class="">Inspiration: 0</div>
                 <div class="">
-                    Proficiency bonus: {{ proficiencyBonus }}
+                    Proficiency bonus: {{ calculateProficiency(player.level) }}
                 </div>
             </div>
         </div>

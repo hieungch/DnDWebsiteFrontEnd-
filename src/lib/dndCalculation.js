@@ -5,3 +5,16 @@ export function calculateModifier(score) {
 export function isStatProficient(statName) {
   return statName === "dexterity";
 }
+
+export function calculateProficiency(charLevel) {
+  let profBonus = 2;
+
+  for (let i = 4; i <= 16; i = i + 4) {
+    if (charLevel <= i) {
+      break;
+    }
+    profBonus++;
+  }
+
+  return profBonus;
+}
