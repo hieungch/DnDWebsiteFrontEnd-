@@ -1,22 +1,11 @@
 <script setup>
-import {calculateModifier} from "../lib/dndCalculation.js"
- 
-const props = defineProps({
-        statScore:{
-            type: Array,
-            default() {
-                return [];
-            },
-        },
-    });
+
 </script>
 
 <template>
     <div class="ability-score-field">
-            <div class="ability-score-box" v-for="stat in statScore" :key="stat.name">
-                    <div>
-                      {{ stat.name }}: {{ stat.value }} |-> {{calculateModifier(stat.value)}}
-                    </div>       
+            <div class="ability-score-box">
+                <h3>Feats</h3>
             </div>
     </div>
 </template>

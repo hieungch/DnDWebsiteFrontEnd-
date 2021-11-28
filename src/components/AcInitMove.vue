@@ -3,25 +3,52 @@
 </script>
 
 <template>
-        <h2>movement & AC</h2>
-        <div class="row">
-            <div class="col">AC 
-            <div>
-                15
+        <div class="row ac-move-field">
+            <div class=" col ac-move-box">
+                <div>
+                    AC
+                </div>   
+                <div>
+                    15
+                </div>  
             </div>
-        </div>
-        <div class="col">Initiative
-            <div>
-                5
+            <div class=" col ac-move-box">
+                <div>
+                    Initiative
+                </div>
+                <div>
+                    1
+                </div>  
             </div>
-        </div>
-        <div class="col">Speed(ft)
-            <div>
-                30
+            <div class=" col ac-move-box">
+                <div>
+                    Speed
+                </div>   
+                <div>
+                    30
+                </div> 
             </div>
-        </div>
         </div>
 </template>
 
 <style scoped lang="scss">
+    .ac-move-field{
+    border-radius: 25px;
+    background-color: #000957;
+    margin: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+    .ac-move-box{
+    border-radius: 25px;
+    text-align: center;
+    background-color: #344CB7;
+    margin: 10px;
+}
+
+
+div{
+    color: hsl(var(--color-base-hue), 100%, 87%);
+}
 </style>

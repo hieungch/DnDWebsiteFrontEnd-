@@ -8,6 +8,10 @@ import AbilityScores from "./AbilityScores.vue";
 import SavingThrow from "./SavingThrow.vue";
 import HpBox from "./HpBox.vue"
 import AcInitMove from "./AcInitMove.vue";
+import Abilities from "./Abilities.vue";
+import Feats from "./feats.vue";
+import Inventory from "./Inventory.vue";
+import Proficienies from "./Proficienies.vue";
 
 
 // defineProps({
@@ -54,7 +58,7 @@ let player = reactive({
 
 const stats = [
   {
-    name: "strenth",
+    name: "strength",
     value: player.strength,
   },
   {
@@ -262,40 +266,83 @@ function lvUp(){
       <PlayerInfo :player="player" @levelUpEvent="lvUp()"/>
     </div>
     <div class="row">
-      <div class="col">
-      <!-- basic stats -->
+      <div class="col-3">
       <AbilityScores :statScore="stats"/>
-
-      <!-- saving throw -->
       <SavingThrow :savesScore = "stats" />
-
-      
       </div>
-      <div class="col">
-        <!-- skills -->
+
+      <div class="col-3">
       <Skill :skills="skillArray" />
       <!--<Skill is meant for component-->
       <!--skills meant the reqired prop from skill comp  -->
       <!-- skillArray meant the variable in the script section-->
       </div>
-      <div class="col">
-      <!-- player movement -->
+
+      <div class="col-3">
       <AcInitMove/>
-      <!-- player HP -->
       <HpBox :player ="player"/>
       </div>
-      <div class="col">
-      <h2>inventory</h2>
+
+      <div class="col-3">
+      <Abilities/>
+      <Feats/>
+      <Inventory/>
+      <Proficienies/>
       </div>
     </div>
     <!-- <div class="col col-1">
       <DiceBoard :diceType="{ minPoint: 2, maxPoint: 5 }" :quantity="5" />
     </div> -->
 
+    <div class="fixed-in-btn">
+      <p>Dice roller</p>
+    </div>
+
 </template>
 
-<style scoped>
-.section {
-  margin: 10px 0;
+<style>
+:root {
+  font-size: 20px;
+  color: var(--color-text-light);
+  --color-base-hue: 200;
+  --color-danger-hue-offset: 180;
+  --color-danger-hue: calc(var(--color-base-hue) - var(--color-danger-hue-offset));
+  --color-background-dark: hsl(var(--color-base-hue), 100%, 8%);
+  --color-background-light: hsl(var(--color-base-hue), 100%, 16%);
+  --color-text-light: hsl(var(--color-base-hue), 100%, 87%);
+
+  --color-btn-primary-background: hsl(var(--color-base-hue), 100%, 83%);
+  --color-btn-primary-background-dark: hsl(var(--color-base-hue), 100%, 73%);
+  --color-btn-primary-text: hsl(var(--color-base-hue), 100%, 20%);
+  --color-btn-primary-text-dark: hsl(var(--color-base-hue), 100%, 10%);
+  --color-btn-border: black;
+  --color-btn-danger-background: hsl(var(--color-danger-hue), 100%, 83%);
+  --color-btn-danger-background-dark: hsl(var(--color-danger-hue), 100%, 73%);
+  --color-btn-danger-text: black;
+  --color-btn-danger-text-dark: black;
+}
+
+
+.fixed-in-btn{
+    color: white;
+    position: fixed;
+    bottom: 10%;
+    right: 3%;
+    background: #0FACF3;
+    width: 180px;
+    height: 45px;
+    line-height: 45px;
+    text-align: center;
+    border-radius: 3px;
+    box-shadow: 4px 4px 4px #0a78aa;
+    cursor: pointer;
+  }
+
+body {
+  background: linear-gradient(
+    to right,
+    var(--color-background-dark),
+    var(--color-background-light)
+  );
 }
 </style>
