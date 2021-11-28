@@ -1,7 +1,6 @@
 import axios from "axios";
 
-
-const uri = "http://localhost:5000";// TODO: export this to config file
+const uri = "http://localhost:5000"; // TODO: export this to config file
 
 const characterSheetEndPoint = `${uri}/charactersheets`;
 const abilityEndPoint = `${uri}/abilities`;
@@ -17,38 +16,41 @@ const specialStatEndPoint = `${uri}/specialstats`;
 const subraceEndPoint = `${uri}/subraces`;
 
 export const CharacterSheetRepository = {
-    async getAll() {
-        const result = await axios.get(characterSheetEndPoint);
-        if (result.status == 200) {
-          return result.data;
-        }
-        throw `request failed with status ${result.status}`;
-      },
-      
-      async getById(id) {
-        const result = await axios.get(`${characterSheetEndPoint}/${id}`);
-        if (result.status == 200) {
-          return result.data;
-        }
-        throw `request failed with status ${result.status}`;
-      },
-      
-      async create(character) {
-        const result = await axios.post(characterSheetEndPoint, character);
-        if (result.status != 200) {
-          return result.data;
-        }
-        throw `request failed with status ${result.status}`;
-      },
+  async getAll() {
+    const result = await axios.get(characterSheetEndPoint);
+    if (result.status == 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
 
-      async update(id,newCharacter) {
-        const result = await axios.put(`${characterSheetEndPoint}/${id}`, newCharacter);
-        if (result.status != 200) {
-          return result.data;
-        }
-        throw `request failed with status ${result.status}`;
-      }
-}
+  async getById(id) {
+    const result = await axios.get(`${characterSheetEndPoint}/${id}`);
+    if (result.status == 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
+
+  async create(character) {
+    const result = await axios.post(characterSheetEndPoint, character);
+    if (result.status != 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
+
+  async update(id, newCharacter) {
+    const result = await axios.put(
+      `${characterSheetEndPoint}/${id}`,
+      newCharacter
+    );
+    if (result.status != 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
+};
 
 export const AbilityRepository = {
   async getAll() {
@@ -58,7 +60,7 @@ export const AbilityRepository = {
     }
     throw `request failed with status ${result.status}`;
   },
-}
+};
 
 export const BackgroundRepository = {
   async getAll() {
@@ -68,7 +70,15 @@ export const BackgroundRepository = {
     }
     throw `request failed with status ${result.status}`;
   },
-}
+
+  async getById(id) {
+    const result = await axios.get(`${backgroundEndPoint}/${id}`);
+    if (result.status == 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
+};
 
 export const CharacterClassRepository = {
   async getAll() {
@@ -78,7 +88,15 @@ export const CharacterClassRepository = {
     }
     throw `request failed with status ${result.status}`;
   },
-}
+
+  async getById(id) {
+    const result = await axios.get(`${characterClassEndPoint}/${id}`);
+    if (result.status == 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
+};
 
 export const DiceTypeRepository = {
   async getAll() {
@@ -88,7 +106,7 @@ export const DiceTypeRepository = {
     }
     throw `request failed with status ${result.status}`;
   },
-}
+};
 
 export const FeatRepository = {
   async getAll() {
@@ -98,7 +116,15 @@ export const FeatRepository = {
     }
     throw `request failed with status ${result.status}`;
   },
-}
+
+  async getById(id) {
+    const result = await axios.get(`${featEndPoint}/${id}`);
+    if (result.status == 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
+};
 
 export const LevelRepository = {
   async getAll() {
@@ -108,7 +134,7 @@ export const LevelRepository = {
     }
     throw `request failed with status ${result.status}`;
   },
-}
+};
 
 export const RaceRepository = {
   async getAll() {
@@ -118,7 +144,15 @@ export const RaceRepository = {
     }
     throw `request failed with status ${result.status}`;
   },
-}
+
+  async getById(id) {
+    const result = await axios.get(`${raceEndPoint}/${id}`);
+    if (result.status == 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
+};
 
 export const SkillRepository = {
   async getAll() {
@@ -128,7 +162,7 @@ export const SkillRepository = {
     }
     throw `request failed with status ${result.status}`;
   },
-}
+};
 
 export const SpecialStatRepository = {
   async getAll() {
@@ -138,7 +172,7 @@ export const SpecialStatRepository = {
     }
     throw `request failed with status ${result.status}`;
   },
-}
+};
 
 export const SubraceRepository = {
   async getAll() {
@@ -148,5 +182,12 @@ export const SubraceRepository = {
     }
     throw `request failed with status ${result.status}`;
   },
-}
 
+  async getById(id) {
+    const result = await axios.get(`${subraceEndPoint}/${id}`);
+    if (result.status == 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
+};

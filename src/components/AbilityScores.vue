@@ -2,13 +2,34 @@
 import {calculateModifier} from "../lib/dndCalculation.js"
  
 const props = defineProps({
-        statScore:{
-            type: Array,
-            default() {
-                return [];
-            },
-        },
+        player: Object,
     });
+const statScore = [
+  {
+    name: "strength",
+    value: props.player.strength,
+  },
+  {
+    name: "dexterity",
+    value: props.player.dexterity,
+  },
+  {
+    name: "constitution",
+    value: props.player.constitution,
+  },
+  {
+    name: "intelligent",
+    value: props.player.intelligent,
+  },
+  {
+    name: "wisdom",
+    value: props.player.wisdom,
+  },
+  {
+    name: "charisma",
+    value: props.player.charisma,
+  },
+];
 </script>
 
 <template>

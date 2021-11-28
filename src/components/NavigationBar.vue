@@ -6,11 +6,12 @@
     <nav class="header-nav">
         <a class="header-title" href="/">MyWeb</a>
         <ul>
-            <li class="header-link"> <a href="/authors">Home</a></li>
-            <li class="header-link"> <a href="/authors/new">Clases</a></li>
-            <li class="header-link"> <a href="/books">Backgrounds</a></li>
-            <li class="header-link"> <a href="/books/new">Feats</a></li>
-            <li class="header-link"> <a href="/login">Login</a></li>
+            <li class="header-link"> <router-link to="/">Home</router-link>  </li>
+            <li class="header-link"> <router-link to="/characterSheet">Characters</router-link> </li>
+            <li class="header-link"> <router-link to="/classList">Classes</router-link></li>
+            <li class="header-link"> <router-link to="/backgroundList">Backgrounds</router-link></li>
+            <li class="header-link"> <router-link to="/raceList">Races</router-link></li>
+            <li class="header-link"> <router-link to="/featList">Feats</router-link></li>
         </ul>
     </nav>
 </header>

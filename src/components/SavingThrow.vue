@@ -2,15 +2,34 @@
 
 import {calculateModifier, calculateProficiency} from "../lib/dndCalculation.js"
 const props = defineProps({
-        savesScore:{
-            type: Array,
-            default() {
-                return [];
-            },
-        },
         player: Object,
     });
-
+const savesScore = [
+  {
+    name: "strength",
+    value: props.player.strength,
+  },
+  {
+    name: "dexterity",
+    value: props.player.dexterity,
+  },
+  {
+    name: "constitution",
+    value: props.player.constitution,
+  },
+  {
+    name: "intelligent",
+    value: props.player.intelligent,
+  },
+  {
+    name: "wisdom",
+    value: props.player.wisdom,
+  },
+  {
+    name: "charisma",
+    value: props.player.charisma,
+  },
+];
 </script>
 
 <template>
@@ -21,7 +40,8 @@ const props = defineProps({
             <input
             type="checkbox"
             :name="'cbk' + stat.name"
-            :checked="player.characterClass.profSavingThrow.includes(stat.name)"/>
+            :checked="player.characterClass.profSavingThrow.includes(stat.name)"
+            disabled/>
           </div>
 
           <div class="col">

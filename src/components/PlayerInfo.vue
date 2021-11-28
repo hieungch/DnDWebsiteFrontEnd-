@@ -1,12 +1,12 @@
 <script setup>
-import {calculateProficiency} from "../lib/dndCalculation.js"
+import { onMounted } from "vue";
+import {calculateProficiency} from "../lib/dndCalculation.js";
 const props = defineProps({
         player: Object,
     });
 // this is for leveling up
 // it can be used many time defineEmits(["","",...])
-const emit = defineEmits(["levelUpEvent"])
-
+const emit = defineEmits(["levelUpEvent","loadAnotherChar"]);
 </script>
 
 <template>
@@ -14,12 +14,12 @@ const emit = defineEmits(["levelUpEvent"])
      <div class="row player-info-box">
         <div class="player-name">
             Character name: {{ player.name }} 
-            <!-- <span>#{{ player.id }}</span> -->
         </div>
         <div class="player-sheet-option">
             <button @click='emit("levelUpEvent")' class="btn btn-primary">Level Up</button>
             <button @click='emit("levelUpEvent")' class="btn btn-primary">Level Down</button>
             <button @click='emit("levelUpEvent")' class="btn btn-primary">Edit</button>
+            <button @click='emit("loadAnotherChar")' class="btn btn-primary">Load another character</button>
         </div>
      </div>
     </div>
@@ -28,12 +28,12 @@ const emit = defineEmits(["levelUpEvent"])
         <div class="row">
             <div class="col player-info-box">
                 <div>
-                    Class: {{ player.characterClass.className }}
+                    Class: {{ player.characterClass.className}}
                 </div>
-                <div class="">
+                <div >
                     Race: Human
                 </div>
-                <div class="">
+                <div>
                     Background: sage
                 </div>
             </div>

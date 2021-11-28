@@ -25,7 +25,8 @@ import {calculateModifier,calculateProficiency} from "../lib/dndCalculation.js"
         <div class="row skill-box" v-for="skill in skills" :key="skill.skillname">
             <div class="col-1">
                 <input type="checkbox"
-                :checked="getSkillProfs().includes(skill.id)"/>
+                :checked="getSkillProfs().includes(skill.id)"
+                disabled/>
             </div>
             <div class="col">
                 {{ skill.skillname }} ({{skill.statModifier}}) |->
