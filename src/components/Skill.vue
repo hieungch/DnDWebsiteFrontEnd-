@@ -15,11 +15,9 @@ import {calculateModifier,calculateProficiency} from "../lib/dndCalculation.js"
             ...props.player.skillProficency,
             ...props.player.background.skillprof
         ];
-        // console.log("rs=", result);
         return result;
     }
 </script>
-
 <template>
     <div class="skill-field">
         <div class="row skill-box" v-for="skill in skills" :key="skill.skillname">
@@ -41,12 +39,6 @@ import {calculateModifier,calculateProficiency} from "../lib/dndCalculation.js"
 </template>
 
 <style scoped lang="scss">
-
-    .three_chars{
-  width: 3.2ch;
-  overflow: hidden;
-  white-space: nowrap;
-}
 
     .skill-field{
     border-radius: 25px;

@@ -5,7 +5,7 @@
 <template>
     <div class="ability-score-field">
             <div class="ability-score-box">
-                      <h3>Abilities</h3>
+                <h3 >Abilities</h3>
             </div>
     </div>
 </template>

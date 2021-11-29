@@ -53,4 +53,12 @@ button:hover{
   transition: 0.5s;
   
 }
+
+input[type=checkbox][disabled]{
+        outline:2px solid white;
+    }
+
+    input[type=checkbox]:checked {
+    outline:3px solid #EBE645; 
+    } 
 </style>

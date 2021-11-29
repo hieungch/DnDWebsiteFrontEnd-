@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const uri = "http://localhost:5000"; // TODO: export this to config file
+const uri = "http://localhost:5000";
 
 const characterSheetEndPoint = `${uri}/charactersheets`;
 const abilityEndPoint = `${uri}/abilities`;

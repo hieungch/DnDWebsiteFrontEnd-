@@ -34,6 +34,8 @@
 
 <style lang="scss">
 
+
+
 .middle-box{
   text-align: center;
   background-color: blue;
