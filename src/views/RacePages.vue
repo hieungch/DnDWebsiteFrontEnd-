@@ -37,9 +37,12 @@ async function loadAnotherRace(){
 </div>
 
 <div v-if="!raceIsLoaded">
-  <div v-for="Race in data.races" :key= "Race .id">
-    <button @click="selectRace(Race )">View races {{Race .id}}</button>
+  <div class="box-list content-box-list">
+    <div v-for="Race in data.races" :key= "Race .id">
+      <button class="btn-list" @click="selectRace(Race )">{{Race.name}}</button>
+    </div>
   </div>
+  
 </div>
 
 </template>

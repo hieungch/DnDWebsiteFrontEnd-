@@ -16,8 +16,9 @@ const props = defineProps({
         <div>
             Skill proficiency: {{background.skillprof[0].skillname}}, {{background.skillprof[1].skillname}}
         </div>
-        <button @click='emit("loadAnotherBackground")' class="btn btn-primary">Load background list</button>
-                
+        <div class="btn-center">
+            <button @click='emit("loadAnotherBackground")' class="btn btn-primary">Load background list</button>
+         </div>       
     </div> 
 </template>
 

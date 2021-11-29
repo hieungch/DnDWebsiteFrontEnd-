@@ -35,36 +35,30 @@ async function loadAnotherClass(){
 <template>
 <div v-if="classIsLoaded">
     <div class="row">
-        <ClassDescription :classRole="data.classStyle" @loadAnotherClass="loadAnotherClass()"/>
+        <ClassDescription :classRole="data.classStyle"/>
 
         <ClassProficientSkills :classRole="data.classStyle"/>
 
     </div>
 
     <div class="row">
-        <ClassAbilities :classRole="data.classStyle"/>
+        <ClassAbilities :classRole="data.classStyle" @loadAnotherClass="loadAnotherClass()"/>
     </div>
 </div>
 
 <div v-if="!classIsLoaded">
-  <div v-for="PickClass in data.classes" :key= "PickClass.id">
-    <button @click="selectClass(PickClass)">View class {{PickClass.id}}</button>
+
+  <div class="box-list content-box-list">
+    <div v-for="PickClass in data.classes" :key= "PickClass.id">
+      <button class="btn-list" @click="selectClass(PickClass)">{{PickClass.className}}</button>
+    </div>
   </div>
+
 </div>
 
 </template>
 
 <style>
-:root {
-  font-size: 20px;
-  color: var(--color-text-light);
-  --color-base-hue: 200;
-  --color-danger-hue-offset: 180;
-  --color-danger-hue: calc(var(--color-base-hue) - var(--color-danger-hue-offset));
-  --color-background-dark: hsl(var(--color-base-hue), 100%, 8%);
-  --color-background-light: hsl(var(--color-base-hue), 100%, 16%);
-  --color-text-light: hsl(var(--color-base-hue), 100%, 87%);
-}
 
 body {
   background: linear-gradient(

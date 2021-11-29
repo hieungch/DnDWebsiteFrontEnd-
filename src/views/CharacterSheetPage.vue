@@ -256,9 +256,12 @@ function lvUp(){
 </div>
 
 <div v-if="!playerIsLoaded">
-  <div v-for="character in data.sheets" :key= "character.id">
-    <button @click="selectCharacter(character)">View character {{character.id}}</button>
+  <div class="box-list content-box-list">
+    <div v-for="character in data.sheets" :key= "character.id">
+      <button class="btn-list" @click="selectCharacter(character)">View character {{character.name}}</button>
+    </div>
   </div>
+  
 </div>
 
 </template>

@@ -4,6 +4,7 @@ import CharacterSheetPage from "../views/CharacterSheetPage.vue";
 import ClassesPage from "../views/ClassesPage.vue";
 import backgroundPage from "../views/backgroundPages.vue";
 import racePage from "../views/RacePages.vue";
+import featPage from "../views/FeatPages.vue";
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: "/raceList",
     name: "racePage",
     component: racePage,
+  },
+  {
+    path: "/featList",
+    name: "featPage",
+    component: featPage,
   },
 ];
 

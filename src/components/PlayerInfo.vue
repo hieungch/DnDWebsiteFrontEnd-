@@ -1,4 +1,4 @@
-<script setup>
+    <script setup>
 import { onMounted } from "vue";
 import {calculateProficiency} from "../lib/dndCalculation.js";
 const props = defineProps({
@@ -17,9 +17,8 @@ const emit = defineEmits(["levelUpEvent","loadAnotherChar"]);
         </div>
         <div class="player-sheet-option">
             <button @click='emit("levelUpEvent")' class="btn btn-primary">Level Up</button>
-            <button @click='emit("levelUpEvent")' class="btn btn-primary">Level Down</button>
             <button @click='emit("levelUpEvent")' class="btn btn-primary">Edit</button>
-            <button @click='emit("loadAnotherChar")' class="btn btn-primary">Load another character</button>
+            <button @click='emit("loadAnotherChar")' class="btn btn-primary">Load character's list</button>
         </div>
      </div>
     </div>

@@ -29,15 +29,25 @@ import {calculateModifier,calculateProficiency} from "../lib/dndCalculation.js"
                 disabled/>
             </div>
             <div class="col">
-                {{ skill.skillname }} ({{skill.statModifier}}) |->
+                {{ skill.skillname }} |-->
                 {{calculateModifier(player[skill.statModifier]) + 
-                (getSkillProfs().includes(skill.id) ? calculateProficiency(player.level) : 0) }} 
+                (getSkillProfs().includes(skill.id) ? calculateProficiency(player.level) : 0) }}
+                <div>
+                    ({{skill.statModifier}}) 
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <style scoped lang="scss">
+
+    .three_chars{
+  width: 3.2ch;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
     .skill-field{
     border-radius: 25px;
     background-color: #000957;

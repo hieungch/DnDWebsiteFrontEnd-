@@ -37,7 +37,9 @@ const props = defineProps({
             </tbody>
         </table>
         
-        <button @click='emit("loadAnotherRace")' class="btn btn-primary">Load race list</button>
+        <div class="btn-center">
+            <button @click='emit("loadAnotherRace")' class="btn btn-primary">Load race list</button>
+        </div>
                 
     </div> 
 </template>

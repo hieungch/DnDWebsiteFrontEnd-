@@ -26,7 +26,6 @@ const emit = defineEmits(["loadAnotherClass"]);
         <div>
             special stat: {{ classRole.specialStat.specialStatName}}
         </div>
-        <button @click='emit("loadAnotherClass")' class="btn btn-primary">Load classlist</button>
     </div>   
 
 </template>

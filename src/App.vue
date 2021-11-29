@@ -13,7 +13,44 @@ import NavigationBar from "./components/NavigationBar.vue";
 </template>
 
 <style lang="scss">
-body {
-  background-color: azure;
+:root {
+  font-size: 20px;
+  color: var(--color-text-light);
+  --color-base-hue: 200;
+  --color-background-dark: hsl(var(--color-base-hue), 100%, 8%);
+  --color-background-light: hsl(var(--color-base-hue), 100%, 16%);
+  --color-text-light: hsl(var(--color-base-hue), 100%, 87%);
+}
+
+th,td{
+    color: hsl(var(--color-base-hue), 100%, 87%);
+}
+
+.box-list{
+  background-color: #2E4C6D;
+}
+
+.content-box-list{
+  border-radius: 25px ;
+  text-align: center;
+}
+
+.btn-list{
+  border-radius: 25px ;
+  margin: 10px;
+  background-color: #577BC1;
+  color: white;
+  padding: 10px;
+}
+
+.btn-center{
+  text-align: center;
+}
+
+
+button:hover{
+  background-color: #2b18d6;
+  transition: 0.5s;
+  
 }
 </style>

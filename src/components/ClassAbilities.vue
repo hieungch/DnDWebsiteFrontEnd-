@@ -3,7 +3,7 @@ const props = defineProps({
         classRole: Object,
     });
 
-    // console.log("data ability =",props.classRole.ability)
+    const emit = defineEmits(["loadAnotherClass"]);
 </script>
 
 <template>
@@ -26,10 +26,13 @@ const props = defineProps({
                 
             </tbody>
         </table>
-        
+        <div class="btn-center">
+            <button @click='emit("loadAnotherClass")' class="btn btn-primary">Load classlist</button>
+        </div>
                 
     </div> 
 </template>
 
-<style>
+<style scoped lang="scss">
+
 </style>

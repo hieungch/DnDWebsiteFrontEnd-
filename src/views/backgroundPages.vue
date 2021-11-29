@@ -37,10 +37,16 @@ async function loadAnotherBackground(){
 </div>
 
 <div v-if="!backgroundIsLoaded">
-  <div v-for="Background in data.backgrounds" :key= "Background .id">
-    <button @click="selectBackground(Background )">View Backgounds {{Background .id}}</button>
+  
+  <div class="box-list content-box-list">
+    <div v-for="Background in data.backgrounds" :key= "Background .id">
+      <button class="btn-list" @click="selectBackground(Background )">
+       {{Background.name}}'s background
+      </button>
+    </div>
   </div>
 </div>
+
 
 </template>
 
