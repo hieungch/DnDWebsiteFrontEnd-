@@ -30,10 +30,10 @@ const emit = defineEmits(["levelUpEvent","loadAnotherChar"]);
                     Class: {{ player.characterClass.className}}
                 </div>
                 <div >
-                    Race: Human
+                    Race: {{ player.race.name}}
                 </div>
                 <div>
-                    Background: sage
+                    Background: {{ player.background.name}}
                 </div>
             </div>
             

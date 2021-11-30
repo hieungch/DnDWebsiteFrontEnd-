@@ -1,5 +1,36 @@
 <script setup>
+import {calculateModifier} from "../lib/dndCalculation.js"
 
+    const props = defineProps({
+        player: Object,
+    });
+
+const statScore = [
+  {
+    name: "strength",
+    value: props.player.strength,
+  },
+  {
+    name: "dexterity",
+    value: props.player.dexterity,
+  },
+  {
+    name: "constitution",
+    value: props.player.constitution,
+  },
+  {
+    name: "intelligent",
+    value: props.player.intelligent,
+  },
+  {
+    name: "wisdom",
+    value: props.player.wisdom,
+  },
+  {
+    name: "charisma",
+    value: props.player.charisma,
+  },
+];
 </script>
 
 <template>
@@ -9,7 +40,7 @@
                     AC
                 </div>   
                 <div>
-                    15
+                    {{10 + calculateModifier(statScore[1].value)}}
                 </div>  
             </div>
             <div class=" col ac-move-box">
@@ -17,7 +48,7 @@
                     Initiative
                 </div>
                 <div>
-                    1
+                    {{calculateModifier(statScore[1].value)}}
                 </div>  
             </div>
             <div class=" col ac-move-box">

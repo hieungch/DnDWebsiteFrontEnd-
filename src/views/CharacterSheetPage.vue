@@ -68,12 +68,12 @@ function lvUp() {
       </div>
 
       <div class="col-3">
-        <AcInitMove />
+        <AcInitMove :player="data.player" />
         <HpBox :player="data.player" />
       </div>
 
       <div class="col-3">
-        <Abilities />
+        <Abilities :player="data.player" />
         <Feats />
         <Inventory />
         <Proficienies />
