@@ -53,10 +53,10 @@ const statScore = [
             </div>
             <div class=" col ac-move-box">
                 <div>
-                    Speed
+                    Speed(ft)
                 </div>   
                 <div>
-                    30
+                    {{player.race.speed}} 
                 </div> 
             </div>
         </div>
