@@ -1,17 +1,32 @@
 <script setup>
-
+const props = defineProps({
+  player: Object,
+});
 </script>
 
 <template>
     <div class="ability-score-field">
-            <div class="ability-score-box">
-                      <h3>Proficiencies</h3>
+        <h3>Proficiencies</h3>
+           <div class="ability-score-box" >  
+                Tool (background): {{ player.background.toolprof}}
+            </div>
+            <div class="ability-score-box" >
+                Tool (class): {{player.characterClass.proftools}}
+            </div>
+            <div class="ability-score-box" >
+                Weapon: {{player.characterClass.profWeapon}}
+            </div>
+            <div class="ability-score-box" >
+                Armor: {{player.characterClass.profArmor}}
             </div>
     </div>
 </template>
 
 <style scoped lang="scss">
 
+h3{
+    text-align: center;
+}
 .ability-score-field{
     border-radius: 25px;
     background-color: #000957;

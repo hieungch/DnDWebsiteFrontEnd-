@@ -1,49 +1,55 @@
 <script setup>
-import { onMounted, reactive } from "vue";
-import { AbilityRepository } from "../lib/repositories.js";
+import {ref} from "vue";
+import {Modal} from "bootstrap";
+
 const props = defineProps({
   player: Object,
 });
 
-const data = reactive({
-  abilities: [],
-});
+const abilityModal = ref(null);
+const abilityName = ref("");
+const abilityDescription = ref("");
 
-onMounted(async () => {
-  data.abilities = await AbilityRepository.getAll();
-});
-// player.level === data.abilities.levelRequirement
-// v-if="player.level === player.characterClass.ability.levelRequirement"
-//  <div style="overflow:scroll; height:400px;">
-// Get the modal
-
+function showAbilityInfo(ability){
+    abilityDescription.value = ability.description;
+    abilityName.value = ability.name;
+    let modal = new Modal(abilityModal.value);
+    modal.toggle()
+}
 </script>
 
 <template>
     <div class="ability-score-field">
         <h3>Abilities</h3>
         
+        <!-- things that behind ":" like :key="" will turn the "" from string to statment -->
             <div class="ability-score-box" >
-                <div class="row skill-box "  
-                v-for="abilities in player.characterClass.ability" :key="abilities.name">
-                   <div v-if="player.level >= abilities.levelRequirement">
-                       {{ abilities.name }} 
-                       <!-- {{ abilities.description }} -->
-                       <span class="btn btn-primary" 
-                            data-bs-toggle="modal"
-                            data-bs-target="#infoTable"> 
+                <div class=" row skill-box "  
+                v-for="ability in player.characterClass.ability" :key="ability.name">
+                   <div v-if="player.level >= ability.levelRequirement">
+                    <div>
+                        {{ ability.name }} 
+                    </div>
+                    
+                    <div>
+                        <!-- {{ ability.description }} -->
+                       <div class="btn btn-primary" 
+                            @click="showAbilityInfo(ability)"
+                            > 
                            More details
-                        </span> 
-            
-                        <div class="modal" id="infoTable">
-                            <div class="modal-dialog">
-                                <div class="modal-content modal-box-bg">
-                                   {{ abilities.name }}: {{ abilities.description }}
-                                </div>
-                            </div>
-                        </div>
+                        </div> 
+                    </div>
                            
                    </div>
+                    
+                </div>
+
+                <div class="modal" ref="abilityModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content modal-box-bg">
+                            {{ abilityName }}: {{ abilityDescription }} 
+                        </div>
+                    </div>
                 </div>
             </div>
     </div>

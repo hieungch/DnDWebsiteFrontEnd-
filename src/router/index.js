@@ -5,6 +5,7 @@ import ClassesPage from "../views/ClassesPage.vue";
 import backgroundPage from "../views/backgroundPages.vue";
 import racePage from "../views/RacePages.vue";
 import featPage from "../views/FeatPages.vue";
+import charCreationPage from "../views/charCreationPage.vue";
 
 const routes = [
   {
@@ -36,6 +37,11 @@ const routes = [
     path: "/featList",
     name: "featPage",
     component: featPage,
+  },
+  {
+    path: "/creationPage",
+    name: "charCreationPage",
+    component: charCreationPage,
   },
 ];
 

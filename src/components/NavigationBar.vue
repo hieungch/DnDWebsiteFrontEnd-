@@ -6,7 +6,7 @@
     <nav class="header-nav">
         <router-link class="header-title" to="/">D&D fun</router-link>
         <ul>
-            <li class="header-link"> <router-link to="#">New character</router-link>  </li>
+            <li class="header-link"> <router-link to="/creationPage">New character</router-link>  </li>
             <li class="header-link"> <router-link to="/characterSheet">Characters</router-link> </li>
             <li class="header-link"> <router-link to="/classList">Classes</router-link></li>
             <li class="header-link"> <router-link to="/backgroundList">Backgrounds</router-link></li>

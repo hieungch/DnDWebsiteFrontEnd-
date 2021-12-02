@@ -10,6 +10,8 @@ const data = reactive({
   modifier: 0,
 });
 
+// seleted Dice mean the chosen dice, by default is the first die
+// ?? if it doesnt exist then the value is null
 const selectedDice = ref(data.dices[0] ?? null);
 
 onMounted(async () => {
@@ -39,15 +41,19 @@ function modifierDown() {
 }
 
 function removeResultItem(index) {
+  // array [1,2,3,4] in relation to index 0 ,1 ,2 ,3
+  // splice will delete based on index, the number in this case 1, will dictate how many will be deleted
   data.results.splice(index, 1);
 }
 
 function calculTotal() {
+  // reduce, 
   return data.results.reduce((a, b) => a + b.value + b.mod, 0);
 }
 
 function rollDice() {
   if (selectedDice.value != null) {
+    // hoamny quanity dictated will be the number of time the function will roll
     for (let i = 0; i < data.quantity; i++) {
       data.results.push({
         value: getRndInteger(
@@ -111,6 +117,7 @@ function rollDice() {
         <div class="modal-footer container">
           <div class="container">
             <div class="row">
+              <!-- v-model two way data-binding -->
               <select class="col" v-model="selectedDice">
                 <option
                   v-for="dice in data.dices"
@@ -197,7 +204,7 @@ function rollDice() {
               <button
                 type="button"
                 class="btn btn-primary col-3"
-                @click="rollDice(1)"
+                @click="rollDice()"
               >
                 Roll
               </button>

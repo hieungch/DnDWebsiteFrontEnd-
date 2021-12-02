@@ -40,8 +40,14 @@ async function loadAnotherChar() {
 }
 
 function lvUp() {
-  if (data.player.level <= 20) {
+  if (data.player.level < 20) {
     data.player.level++;
+  }
+}
+
+function lvDown() {
+  if (data.player.level > 1) {
+    data.player.level--;
   }
 }
 </script>
@@ -54,13 +60,14 @@ function lvUp() {
       <PlayerInfo
         :player="data.player"
         @loadAnotherChar="loadAnotherChar()"
-        @levelUpEvent="lvUp()"
+        @levelUpEvent="lvUp()" @levelDownEvent="lvDown()"
       />
     </div>
     <div class="row">
       <div class="col-3">
         <AbilityScores :player="data.player" />
         <SavingThrow :player="data.player" />
+        <Proficienies :player="data.player"/>
       </div>
 
       <div class="col-3">
@@ -76,7 +83,6 @@ function lvUp() {
         <Abilities :player="data.player" />
         <Feats />
         <Inventory />
-        <Proficienies />
       </div>
     </div>
   </div>

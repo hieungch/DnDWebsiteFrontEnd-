@@ -1,12 +1,11 @@
-    <script setup>
-import { onMounted } from "vue";
+<script setup>
 import {calculateProficiency} from "../lib/dndCalculation.js";
 const props = defineProps({
         player: Object,
     });
 // this is for leveling up
 // it can be used many time defineEmits(["","",...])
-const emit = defineEmits(["levelUpEvent","loadAnotherChar"]);
+const emit = defineEmits(["levelUpEvent","loadAnotherChar","levelDownEvent"]);
 </script>
 
 <template>
@@ -16,9 +15,10 @@ const emit = defineEmits(["levelUpEvent","loadAnotherChar"]);
             Character name: {{ player.name }} 
         </div>
         <div class="player-sheet-option">
-            <button @click='emit("levelUpEvent")' class="btn btn-primary">Level Up</button>
             <button @click='emit("levelUpEvent")' class="btn btn-primary">Edit</button>
-            <button @click='emit("loadAnotherChar")' class="btn btn-primary">Load character's list</button>
+        </div>
+        <div class="player-sheet-option">
+            <button @click='emit("levelUpEvent")' class="btn btn-primary">Save</button>  
         </div>
      </div>
     </div>
@@ -35,6 +35,9 @@ const emit = defineEmits(["levelUpEvent","loadAnotherChar"]);
                 <div>
                     Background: {{ player.background.name}}
                 </div>
+                <div class="player-sheet-option">
+                    <button @click='emit("loadAnotherChar")' class="btn btn-primary">Load character's list</button> 
+                </div>
             </div>
             
             <div class="col player-info-box"> 
@@ -45,6 +48,10 @@ const emit = defineEmits(["levelUpEvent","loadAnotherChar"]);
                 <div class="">
                     Proficiency bonus: {{ calculateProficiency(player.level) }}
                 </div>
+                <div class="player-sheet-option">
+                    <button @click='emit("levelUpEvent")' class="btn btn-primary">Level Up</button>
+                    <button @click='emit("levelDownEvent")' class="btn btn-primary">Level Down</button>
+                 </div>
             </div>
         </div>
     </div>
@@ -73,7 +80,7 @@ const emit = defineEmits(["levelUpEvent","loadAnotherChar"]);
   border: 1px solid var(--color-btn-border);
   margin: .2rem;
   border-radius: .5rem;
-  padding: .5rem 1rem;
+  padding: .25rem .5rem;
   font-size: 1.2rem;
   cursor: pointer;
   text-decoration: none;
