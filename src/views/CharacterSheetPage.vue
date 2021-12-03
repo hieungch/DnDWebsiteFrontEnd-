@@ -2,7 +2,7 @@
 import { reactive, onMounted, ref } from "vue";
 import { CharacterSheetRepository } from "../lib/repositories.js";
 
-// import CharacterSheet from "../mock/characterSheet.json";
+// import components
 import Skill from "../components/Skill.vue";
 import DiceRoller from "../components/DiceRoller.vue";
 import PlayerInfo from "../components/PlayerInfo.vue";
@@ -28,6 +28,7 @@ onMounted(async () => {
   }
 });
 
+
 function selectCharacter(character) {
   data.player = character;
   playerIsLoaded.value = true;
@@ -50,6 +51,10 @@ function lvDown() {
     data.player.level--;
   }
 }
+
+async function updateCharacter(id, newCharacter) {
+  let savingCharacter = await CharacterSheetRepository.update(id, newCharacter);
+}
 </script>
 
 <template>
@@ -60,7 +65,7 @@ function lvDown() {
       <PlayerInfo
         :player="data.player"
         @loadAnotherChar="loadAnotherChar()"
-        @levelUpEvent="lvUp()" @levelDownEvent="lvDown()"
+        @levelUpEvent="lvUp()" @levelDownEvent="lvDown()" @characterSavingEvent="updateCharacter(id, newCharacter)"
       />
     </div>
     <div class="row">

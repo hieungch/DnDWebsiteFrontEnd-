@@ -5,7 +5,7 @@ const props = defineProps({
     });
 // this is for leveling up
 // it can be used many time defineEmits(["","",...])
-const emit = defineEmits(["levelUpEvent","loadAnotherChar","levelDownEvent"]);
+const emit = defineEmits(["levelUpEvent","loadAnotherChar","levelDownEvent","characterSavingEvent","editCharEvent"]);
 </script>
 
 <template>
@@ -15,10 +15,10 @@ const emit = defineEmits(["levelUpEvent","loadAnotherChar","levelDownEvent"]);
             Character name: {{ player.name }} 
         </div>
         <div class="player-sheet-option">
-            <button @click='emit("levelUpEvent")' class="btn btn-primary">Edit</button>
+            <button @click='emit("editCharEvent")' class="btn btn-primary">Edit</button>
         </div>
         <div class="player-sheet-option">
-            <button @click='emit("levelUpEvent")' class="btn btn-primary">Save</button>  
+            <button @click='emit("characterSavingEvent")' class="btn btn-primary">Save</button>  
         </div>
      </div>
     </div>
