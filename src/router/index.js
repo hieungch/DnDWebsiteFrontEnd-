@@ -6,6 +6,7 @@ import backgroundPage from "../views/backgroundPages.vue";
 import racePage from "../views/RacePages.vue";
 import featPage from "../views/FeatPages.vue";
 import charCreationPage from "../views/charCreationPage.vue";
+import charEditPage from "../views/charEditPage.vue";
 
 const routes = [
   {
@@ -42,6 +43,13 @@ const routes = [
     path: "/creationPage",
     name: "charCreationPage",
     component: charCreationPage,
+  },
+  {
+    path: "/editPage/:id",
+    name: "charEditPage",
+    component: charEditPage,
+    // for id routing
+    props: true,
   },
 ];
 

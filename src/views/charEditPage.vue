@@ -2,8 +2,12 @@
 import { onMounted, reactive,computed } from "vue";
 import DiceRoller from "../components/DiceRoller.vue";
 import {CharacterSheetRepository,BackgroundRepository,CharacterClassRepository,SubraceRepository} from "../lib/repositories.js"
+const props = defineProps({
+        id: Number,
+    });
 
 var data = reactive({
+  player: {},
   backgrounds : [],
   selectedBackground: null,
   selectedClass: null,
@@ -21,6 +25,7 @@ var data = reactive({
   charismaScore: null,
   maxHp:null,
 });
+console.log("this char supposed info is= ", data.player)
 // v = virtual
 // ? = if its null then is return as null 
 // ??= if its null the replace it will the value after it
@@ -73,6 +78,8 @@ const isFormDataValid = computed(()=>{
 })
 
 onMounted(async () => {
+  data.player = await CharacterSheetRepository.getById(props.id);
+  console.log("this char info is= ", data.player)
   data.backgrounds = await BackgroundRepository.getAll();
   data.races = await SubraceRepository.getAll();
   data.charClasses = await CharacterClassRepository.getAll();
@@ -119,7 +126,7 @@ async function createCharacter(){
 </script>
 
 <template>
-<h3 style="text-align: center;">Character creation page</h3>
+<h3 style="text-align: center;">Edit {{data.player.name}} page</h3>
 <DiceRoller ref="child" />
 <form class="row g-3">
     

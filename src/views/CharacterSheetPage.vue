@@ -51,9 +51,19 @@ function lvDown() {
     data.player.level--;
   }
 }
+// ... meant clone
+async function updateCharacter() {
+  try{
+    let savingCharacter = {...data.player};
+    savingCharacter.background = data.player.background.id;
+    savingCharacter.race = data.player.race.id;
+    savingCharacter.characterClass = data.player.characterClass.id;
+    // console.log(savingCharacter);
+    await CharacterSheetRepository.update(savingCharacter);
+  } catch(err){
+    console.error(err);
+  }
 
-async function updateCharacter(id, newCharacter) {
-  let savingCharacter = await CharacterSheetRepository.update(id, newCharacter);
 }
 </script>
 
@@ -65,7 +75,7 @@ async function updateCharacter(id, newCharacter) {
       <PlayerInfo
         :player="data.player"
         @loadAnotherChar="loadAnotherChar()"
-        @levelUpEvent="lvUp()" @levelDownEvent="lvDown()" @characterSavingEvent="updateCharacter(id, newCharacter)"
+        @levelUpEvent="lvUp()" @levelDownEvent="lvDown()" @characterSavingEvent="updateCharacter()"
       />
     </div>
     <div class="row">

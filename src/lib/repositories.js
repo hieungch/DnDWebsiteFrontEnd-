@@ -40,12 +40,12 @@ export const CharacterSheetRepository = {
     throw `request failed with status ${result.status}`;
   },
 
-  async update(id, newCharacter) {
+  async update(characterSheet) {
     const result = await axios.put(
-      `${characterSheetEndPoint}/${id}`,
-      newCharacter
+      `${characterSheetEndPoint}/${characterSheet.id}`,
+      characterSheet
     );
-    if (result.status != 200) {
+    if (result.status == 200) {
       return result.data;
     }
     throw `request failed with status ${result.status}`;
