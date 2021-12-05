@@ -53,15 +53,17 @@ function lvDown() {
   }
 }
 
-function healing() {
-  if (data.player.hp < data.player.maxHp) {
-    data.player.hp++;
+function healing(amount) {
+  data.player.hp = data.player.hp + amount
+  if (data.player.hp > data.player.maxHp) {
+    data.player.hp = data.player.maxHp
   }
 }
 
-function damaging() {
-  if (data.player.hp > 0) {
-    data.player.hp--;
+function damaging(amount) {
+  data.player.hp = data.player.hp - amount ;
+  if (data.player.hp < 0) {
+    data.player.hp = 0
   }
 }
 
@@ -117,7 +119,8 @@ async function updateCharacter() {
 
       <div class="col-3">
         <AcInitMove :player="data.player" />
-        <HpBox :player="data.player" @damagingHpEvent="damaging()" @healingHpEvent="healing()" />
+        <!-- $event is -->
+        <HpBox :player="data.player" @damagingHpEvent="damaging($event)" @healingHpEvent="healing($event)" />
         <Feats />
         <Inventory />
       </div>

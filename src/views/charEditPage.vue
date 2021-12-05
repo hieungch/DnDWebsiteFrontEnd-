@@ -7,25 +7,25 @@ const props = defineProps({
     });
 
 var data = reactive({
-  player: {},
-  backgrounds : [],
-  selectedBackground: null,
-  selectedClass: null,
+  characterId: null,
+  backgrounds: [], //fetched
+  selectedBackground: null,// fetched
+  selectedClass: null,//fetched
   selectedClassSkillProfOne: null,
   selectedClassSkillProfTwo: null,
-  races :[],
+  races :[], //fetched
   selectedRace: null,
-  charClasses: [],
-  characterName: null,
-  strengthScore: null,
-  dexterityScore: null,
-  constitutionScore: null,
-  intelligentScore: null,
-  wisdomScore: null,
-  charismaScore: null,
-  maxHp:null,
+  charClasses: [], //fetched
+  characterName: null,//fetched
+  strengthScore: null,//fetched
+  dexterityScore: null,//fetched
+  constitutionScore: null,//fetched
+  intelligentScore: null,//fetched
+  wisdomScore: null,//fetched
+  charismaScore: null,//fetched
+  maxHp:null,//fetched
 });
-console.log("this char supposed info is= ", data.player)
+
 // v = virtual
 // ? = if its null then is return as null 
 // ??= if its null the replace it will the value after it
@@ -78,17 +78,33 @@ const isFormDataValid = computed(()=>{
 })
 
 onMounted(async () => {
-  data.player = await CharacterSheetRepository.getById(props.id);
-  console.log("this char info is= ", data.player)
+  const player = await CharacterSheetRepository.getById(props.id);
+  console.log("this char info is= ", player);
   data.backgrounds = await BackgroundRepository.getAll();
   data.races = await SubraceRepository.getAll();
   data.charClasses = await CharacterClassRepository.getAll();
+  //.find will FIND the first one that satisfy that condition
+  data.selectedBackground = data.backgrounds.find(bg => player.background.id == bg.id);
+  data.characterName = player.name;
+  data.strengthScore = player.strength;
+  data.dexterityScore = player.dexterity;
+  data.constitutionScore = player.constitution;
+  data.intelligentScore = player.intelligent;
+  data.wisdomScore = player.wisdom;
+  data.charismaScore = player.charisma;
+  data.maxHp = player.maxHp;
+  data.selectedRace = data.races.find(race => player.race.id == race.id);
+  data.selectedClass = data.charClasses.find(chosenClass => player.characterClass.id == chosenClass.id );
+  data.selectedClassSkillProfOne = data.selectedClass.profSkill.find(chosenClassProfOne => player.skillProficency[0] == chosenClassProfOne.id);
+  data.selectedClassSkillProfTwo = data.selectedClass.profSkill.find(chosenClassProftwo => player.skillProficency[1] == chosenClassProftwo.id);
+  data.characterId = player.id;
 });
 
 
 
-async function createCharacter(){
-  let newChardata ={
+async function saveCharacter(){
+  let savingCharacter ={
+    id: data.characterId,
     name: data.characterName,
     level: 1,
     inspiration: 0,
@@ -112,7 +128,8 @@ async function createCharacter(){
     feats: [],
   };
   try{
-    await CharacterSheetRepository.create(newChardata);
+    let result = await CharacterSheetRepository.update(savingCharacter);
+    console.log("res=", result)
   } catch(err){
     console.error(err);
   }
@@ -126,7 +143,7 @@ async function createCharacter(){
 </script>
 
 <template>
-<h3 style="text-align: center;">Edit {{data.player.name}} page</h3>
+<h3 style="text-align: center;">Edit character page</h3>
 <DiceRoller ref="child" />
 <form class="row g-3">
     
@@ -212,7 +229,7 @@ async function createCharacter(){
     
   </div>
   <div class="col-12">
-    <button @click="createCharacter()" type="submit" class="btn btn-primary" :disabled="!isFormDataValid">Create Character</button>
+    <button @click="saveCharacter()" class="btn btn-primary" :disabled="!isFormDataValid">Save character</button>
     <router-link class="btn btn-primary" to="/">Cancel</router-link>
     
   </div>

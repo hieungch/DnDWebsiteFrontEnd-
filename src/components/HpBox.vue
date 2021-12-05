@@ -1,9 +1,11 @@
 <script setup>
+import {ref} from "vue";
 const props = defineProps({
         player:{
             type: Object,
         },
     });
+const healthModifier = ref(0);
 const emit = defineEmits(["damagingHpEvent","healingHpEvent",]);
 </script>
 
@@ -47,15 +49,15 @@ const emit = defineEmits(["damagingHpEvent","healingHpEvent",]);
         </div>
         <div class="row">
             <div class="col HP-dice input-field"> 
-                <input style="text-align: center;" type="number" id="modHp">   
+                <input style="text-align: center;" type="number" id="modHp" v-model="healthModifier">   
             </div>
         </div>
         <div class="row">
             <div class="col HP-dice-red">
-                <button @click='emit("damagingHpEvent")' class="btn btn-damage">Damage</button> 
+                <button @click='emit("damagingHpEvent",healthModifier)' class="btn btn-damage">Damage</button> 
             </div>
             <div class="col HP-dice-green">
-                <button @click='emit("healingHpEvent")' class="btn btn-damage">Heal</button> 
+                <button @click='emit("healingHpEvent",healthModifier)' class="btn btn-damage">Heal</button> 
             </div>
         </div>
     </div>
