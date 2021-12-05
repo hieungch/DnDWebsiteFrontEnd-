@@ -50,6 +50,17 @@ export const CharacterSheetRepository = {
     }
     throw `request failed with status ${result.status}`;
   },
+
+  async delete(characterSheet) {
+    const result = await axios.delete(
+      `${characterSheetEndPoint}/${characterSheet.id}`,
+      characterSheet
+    );
+    if (result.status == 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
 };
 
 export const AbilityRepository = {

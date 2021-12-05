@@ -67,6 +67,18 @@ function damaging(amount) {
   }
 }
 
+function inspirationUp() {
+  if (data.player.inspiration < 20) {
+    data.player.inspiration++;
+  }
+}
+
+function inspirationDown() {
+  if (data.player.inspiration > 0) {
+    data.player.inspiration--;
+  }
+}
+
 // function chargeUp() {
 //   if (data.player.characterClass.specialStat.scale.point < 20) {
 //     data.player.characterClass.specialStat.scale.point++;
@@ -78,6 +90,8 @@ function damaging(amount) {
 //     data.player.characterClass.specialStat.scale.point--;
 //   }
 // }
+
+
 // ... meant clone
 async function updateCharacter() {
   try{
@@ -87,6 +101,17 @@ async function updateCharacter() {
     savingCharacter.characterClass = data.player.characterClass.id;
     // console.log(savingCharacter);
     await CharacterSheetRepository.update(savingCharacter);
+  } catch(err){
+    console.error(err);
+  }
+
+}
+
+async function deleteCharacter() {
+  try{
+    let deletingCharacter = {...data.player};
+    // console.log(savingCharacter);
+    await CharacterSheetRepository.delete(deletingCharacter);
   } catch(err){
     console.error(err);
   }
@@ -104,6 +129,8 @@ async function updateCharacter() {
         :player="data.player"
         @loadAnotherChar="loadAnotherChar()" @characterSavingEvent="updateCharacter()"
         @levelUpEvent="lvUp()" @levelDownEvent="lvDown()"
+        @inspirationUpEvent="inspirationUp()" @inspirationDownEvent="inspirationDown()"
+        @characterDeletingEvent="deleteCharacter()"
       />
     </div>
     <div class="row">

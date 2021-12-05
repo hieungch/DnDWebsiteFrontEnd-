@@ -7,6 +7,8 @@ const props = defineProps({
     });
 
 var data = reactive({
+  charlevel:null,
+  charInpriration:null,
   characterId: null,
   backgrounds: [], //fetched
   selectedBackground: null,// fetched
@@ -68,7 +70,6 @@ const isFormDataValid = computed(()=>{
       && data.charismaScore <=20
       && data.maxHp !=null 
       && data.maxHp >=2
-      && data.maxHp <=12
       && data.selectedBackground !=null
       && data.selectedClass !=null
       && data.selectedRace !=null
@@ -98,6 +99,8 @@ onMounted(async () => {
   data.selectedClassSkillProfOne = data.selectedClass.profSkill.find(chosenClassProfOne => player.skillProficency[0] == chosenClassProfOne.id);
   data.selectedClassSkillProfTwo = data.selectedClass.profSkill.find(chosenClassProftwo => player.skillProficency[1] == chosenClassProftwo.id);
   data.characterId = player.id;
+  data.charlevel = player.level;
+  data.charInpriration = player.inspiration;
 });
 
 
@@ -106,8 +109,8 @@ async function saveCharacter(){
   let savingCharacter ={
     id: data.characterId,
     name: data.characterName,
-    level: 1,
-    inspiration: 0,
+    level: data.charlevel,
+    inspiration: data.charInpriration,
     strength: data.strengthScore,
     dexterity: data.dexterityScore,
     constitution: data.constitutionScore,

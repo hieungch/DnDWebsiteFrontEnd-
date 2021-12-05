@@ -56,7 +56,7 @@ const statScore = [
                     Speed(ft)
                 </div>   
                 <div>
-                    {{player.race.speed}} 
+                    {{player.race.mainRace.speed}} 
                 </div> 
             </div>
         </div>

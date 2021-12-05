@@ -9,18 +9,20 @@ const props = defineProps({
 const emit = defineEmits([
     "levelUpEvent","loadAnotherChar",
     "levelDownEvent","characterSavingEvent",
-    "spendChargeEvent","restoreChargeEvent"
+    "spendChargeEvent","restoreChargeEvent",
+    "inspirationUpEvent","inspirationDownEvent",
+    "characterDeletingEvent"
 ]);
 
-// function chargeUp(point) {
-//   if (point < player.characterClass.specialStat.point) {
-//     point++;
+// function chargeUp(classPoint) {
+//   if (classPoint < player.characterClass.specialStat.point) {
+//     classPoint++;
 //   }
 // }
 
-// function chargeDown(point) {
-//   if (point > player.characterClass.specialStat.point) {
-//     point--;
+// function chargeDown(classPoint) {
+//   if (classPoint > player.characterClass.specialStat.point) {
+//     classPoint--;
 //   }
 // }
 </script>
@@ -40,8 +42,8 @@ const emit = defineEmits([
                 <span v-if="player.level == scaling.level">
                     {{scaling.point}}
                     <!-- <div class="player-sheet-option">
-                        <button @click='chargeDown(scaling.point)' class="btn btn-primary">Spend charge</button>
-                        <button @click='chargeUp(scaling.point)' class="btn btn-primary">Restore charge</button>  
+                        <button @click='chargeDown($event,scaling.point)' class="btn btn-primary">Spend charge</button>
+                        <button @click='chargeUp($event,scaling.point)' class="btn btn-primary">Restore charge</button>  
                     </div> -->
                 </span>
             </span>  
@@ -49,6 +51,9 @@ const emit = defineEmits([
         <div class="player-sheet-option">
             <router-link :to="`/editPage/${player.id}`" class="btn btn-primary">Edit</router-link>
             <button @click='emit("characterSavingEvent")' class="btn btn-primary">Save</button>
+        </div>
+        <div class="player-sheet-option">
+            <button @click='emit("characterDeletingEvent")' class="btn btn-primary">Delete</button>
         </div>
      </div>
     </div>
@@ -74,14 +79,18 @@ const emit = defineEmits([
                 <div>
                     Lvl: {{ player.level }}
                 </div>
-                <div class="">Inspiration: 0</div>
+                <div class="">Inspiration(IPR): {{ player.inspiration }}</div>
                 <div class="">
                     Proficiency bonus: {{ calculateProficiency(player.level) }}
                 </div>
                 <div class="player-sheet-option">
-                    <button @click='emit("levelUpEvent")' class="btn btn-primary">Level Up</button>
-                    <button @click='emit("levelDownEvent")' class="btn btn-primary">Level Down</button>
-                 </div>
+                    <button @click='emit("levelUpEvent")' class="btn btn-primary">Lvl Up</button>
+                    <button @click='emit("levelDownEvent")' class="btn btn-primary">Lvl Down</button>
+                </div>
+                <div class="player-sheet-option">
+                    <button @click='emit("inspirationUpEvent")' class="btn btn-primary">IPR Up</button>
+                    <button @click='emit("inspirationDownEvent")' class="btn btn-primary">IPR Down</button>
+                </div>
             </div>
         </div>
     </div>

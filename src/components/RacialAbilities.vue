@@ -6,6 +6,16 @@ const props = defineProps({
   player: Object,
 });
 
+const racialAbilityModal = ref(null);
+const racialAbilityName = ref("");
+const racialAbilityDescription = ref("");
+
+function showRacialAbilityInfo(racialAbility){
+    racialAbilityDescription.value = racialAbility.description;
+    racialAbilityName.value = racialAbility.name;
+    let modal = new Modal(racialAbilityModal.value);
+    modal.toggle()
+}
 
 </script>
 
@@ -14,9 +24,29 @@ const props = defineProps({
         <h3>Racial abilities</h3>
         <div class="ability-score-box" >
             <div class=" row skill-box "  
-                v-for="ability in player.characterClass.ability" :key="ability.name">
-                   {{ ability.name }}        
+                v-for="racialAbility in player.race.subRacialAbilities" :key="racialAbility.name">
+                   <div>
+                       {{ racialAbility.name }} 
+                   </div>
+                   
+                   <div>
+                        <!-- {{ ability.description }} -->
+                       <div class="btn btn-primary" 
+                            @click="showRacialAbilityInfo(racialAbility)"
+                            > 
+                           More details
+                        </div> 
+                    </div>
             </div> 
+
+            <div class="modal" ref="racialAbilityModal">
+                    <div class="modal-dialog">
+                        <div class="modal-content modal-box-bg">
+                            {{ racialAbilityName }}: {{ racialAbilityDescription }} 
+                        </div>
+                    </div>
+                </div>
+
         </div>
     </div>
 </template>
