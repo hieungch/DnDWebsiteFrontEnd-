@@ -4,6 +4,7 @@ const props = defineProps({
             type: Object,
         },
     });
+const emit = defineEmits(["damagingHpEvent","healingHpEvent",]);
 </script>
 
 <template>
@@ -40,21 +41,21 @@ const props = defineProps({
                     Max Hp
                 </div>   
                 <div>
-                   {{ player.hp }} 
+                   {{ player.maxHp }} 
                 </div>  
             </div>
         </div>
         <div class="row">
             <div class="col HP-dice input-field"> 
-                <input style="text-align: center;" type="text">   
+                <input style="text-align: center;" type="number" id="modHp">   
             </div>
         </div>
         <div class="row">
             <div class="col HP-dice-red">
-                <button @click='emit("levelUpEvent")' class="btn btn-damage">Damage</button> 
+                <button @click='emit("damagingHpEvent")' class="btn btn-damage">Damage</button> 
             </div>
             <div class="col HP-dice-green">
-                <button @click='emit("levelUpEvent")' class="btn btn-damage">Heal</button> 
+                <button @click='emit("healingHpEvent")' class="btn btn-damage">Heal</button> 
             </div>
         </div>
     </div>

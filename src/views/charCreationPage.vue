@@ -30,6 +30,10 @@ const selectedBackgroundSkillProf = computed(()=>{
   return data.selectedBackground?.skillprof??[]
 })
 
+const selectedSubRaceScorebonus = computed(()=>{
+  return data.selectedRace?.abilityScoreIncrease??[]
+})
+
 
 const selectedClassAvailableSkillProfOne = computed(()=>{
   return data.selectedClass?.profSkill??[]
@@ -188,6 +192,10 @@ async function createCharacter(){
             {{ race.name }}
         </option>
     </select>
+
+    <div v-for="raceScorebonus in selectedSubRaceScorebonus" :key="raceScorebonus.skillname">
+          {{ raceScorebonus.stat }} |-> {{ raceScorebonus.scoreBonus }}
+      </div>
   </div>
   <!-- @change="showBackgroundSkillProf()" -->
   <div class="col-md-3">

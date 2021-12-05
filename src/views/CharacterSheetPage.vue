@@ -14,6 +14,7 @@ import Abilities from "../components/Abilities.vue";
 import Feats from "../components/feats.vue";
 import Inventory from "../components/Inventory.vue";
 import Proficienies from "../components/Proficienies.vue";
+import RacialAbilities from "../components/RacialAbilities.vue";
 
 var data = reactive({
   player: {},
@@ -51,6 +52,30 @@ function lvDown() {
     data.player.level--;
   }
 }
+
+function healing() {
+  if (data.player.hp < data.player.maxHp) {
+    data.player.hp++;
+  }
+}
+
+function damaging() {
+  if (data.player.hp > 0) {
+    data.player.hp--;
+  }
+}
+
+// function chargeUp() {
+//   if (data.player.characterClass.specialStat.scale.point < 20) {
+//     data.player.characterClass.specialStat.scale.point++;
+//   }
+// }
+
+// function chargeDown() {
+//   if (data.player.characterClass.specialStat.scale.point > 0) {
+//     data.player.characterClass.specialStat.scale.point--;
+//   }
+// }
 // ... meant clone
 async function updateCharacter() {
   try{
@@ -72,10 +97,11 @@ async function updateCharacter() {
     <DiceRoller ref="child" />
     <div class="row">
       <!-- when the event levelupevent is emitted from player info component, run the function lvUp-->
+      <!-- @spendChargeEvent="chargeDown()" @restoreChargeEvent="chargeUp()"  -->
       <PlayerInfo
         :player="data.player"
-        @loadAnotherChar="loadAnotherChar()"
-        @levelUpEvent="lvUp()" @levelDownEvent="lvDown()" @characterSavingEvent="updateCharacter()"
+        @loadAnotherChar="loadAnotherChar()" @characterSavingEvent="updateCharacter()"
+        @levelUpEvent="lvUp()" @levelDownEvent="lvDown()"
       />
     </div>
     <div class="row">
@@ -91,13 +117,14 @@ async function updateCharacter() {
 
       <div class="col-3">
         <AcInitMove :player="data.player" />
-        <HpBox :player="data.player" />
+        <HpBox :player="data.player" @damagingHpEvent="damaging()" @healingHpEvent="healing()" />
+        <Feats />
+        <Inventory />
       </div>
 
       <div class="col-3">
         <Abilities :player="data.player" />
-        <Feats />
-        <Inventory />
+        <RacialAbilities :player="data.player"/>
       </div>
     </div>
   </div>
