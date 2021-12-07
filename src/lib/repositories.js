@@ -14,6 +14,7 @@ const raceEndPoint = `${uri}/races`;
 const skillEndPoint = `${uri}/skills`;
 const specialStatEndPoint = `${uri}/specialstats`;
 const subraceEndPoint = `${uri}/subraces`;
+const characterNotesEndPoint = `${uri}/notes`;
 
 export const CharacterSheetRepository = {
   async getAll() {
@@ -196,6 +197,54 @@ export const SubraceRepository = {
 
   async getById(id) {
     const result = await axios.get(`${subraceEndPoint}/${id}`);
+    if (result.status == 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
+};
+
+export const CharacterNotesRepository = {
+  async getAll() {
+    const result = await axios.get(characterNotesEndPoint);
+    if (result.status == 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
+
+  async getById(id) {
+    const result = await axios.get(`${characterNotesEndPoint}/${id}`);
+    if (result.status == 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
+
+  async create(character) {
+    const result = await axios.post(characterNotesEndPoint, character);
+    if (result.status != 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
+
+  async update(characterSheet) {
+    const result = await axios.put(
+      `${characterNotesEndPoint}/${characterSheet.id}`,
+      characterSheet
+    );
+    if (result.status == 200) {
+      return result.data;
+    }
+    throw `request failed with status ${result.status}`;
+  },
+
+  async delete(characterSheet) {
+    const result = await axios.delete(
+      `${characterNotesEndPoint}/${characterSheet.id}`,
+      characterSheet
+    );
     if (result.status == 200) {
       return result.data;
     }

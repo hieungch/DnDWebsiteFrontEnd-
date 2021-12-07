@@ -80,7 +80,7 @@ const isFormDataValid = computed(()=>{
 
 onMounted(async () => {
   const player = await CharacterSheetRepository.getById(props.id);
-  console.log("this char info is= ", player);
+  // console.log("this char info is= ", player);
   data.backgrounds = await BackgroundRepository.getAll();
   data.races = await SubraceRepository.getAll();
   data.charClasses = await CharacterClassRepository.getAll();

@@ -12,7 +12,7 @@ import HpBox from "../components/HpBox.vue";
 import AcInitMove from "../components/AcInitMove.vue";
 import Abilities from "../components/Abilities.vue";
 import Feats from "../components/feats.vue";
-import Inventory from "../components/Inventory.vue";
+import Notes from "../components/notes.vue";
 import Proficienies from "../components/Proficienies.vue";
 import RacialAbilities from "../components/RacialAbilities.vue";
 
@@ -99,6 +99,7 @@ async function updateCharacter() {
     savingCharacter.background = data.player.background.id;
     savingCharacter.race = data.player.race.id;
     savingCharacter.characterClass = data.player.characterClass.id;
+    savingCharacter.charNotes = data.player.charNotes.id;
     // console.log(savingCharacter);
     await CharacterSheetRepository.update(savingCharacter);
   } catch(err){
@@ -149,7 +150,8 @@ async function deleteCharacter() {
         <!-- $event is -->
         <HpBox :player="data.player" @damagingHpEvent="damaging($event)" @healingHpEvent="healing($event)" />
         <Feats />
-        <Inventory />
+        <!-- @saveNoteToCharEvent="updateCharacter()" -->
+        <Notes :player="data.player" />
       </div>
 
       <div class="col-3">

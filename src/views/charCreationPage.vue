@@ -67,7 +67,6 @@ const isFormDataValid = computed(()=>{
       && data.charismaScore <=20
       && data.maxHp !=null 
       && data.maxHp >=2
-      && data.maxHp <=12
       && data.selectedBackground !=null
       && data.selectedClass !=null
       && data.selectedRace !=null
@@ -107,6 +106,7 @@ async function createCharacter(){
       ...data.selectedBackground.skillprof.map(x=> x.id)
     ],
     feats: [],
+    charNotes: [],
   };
   try{
     await CharacterSheetRepository.create(newChardata);
