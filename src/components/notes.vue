@@ -89,7 +89,7 @@ async function saveNoteToCharSheet() {
 
 <template>
     <div class="ability-score-field">
-        <h3>Racial abilities</h3>
+        <h3>Notes</h3>
         <div class="btn-center">
             <div class="btn btn-primary" @click="addingNewNote()" > 
             Add notes

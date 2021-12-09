@@ -1,7 +1,6 @@
 <script setup>
 // This starter template is using Vue 3 <script setup> SFCs
 // Check out https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup
-import Home from "./views/Home.vue"
 import NavigationBar from "./components/NavigationBar.vue";
 </script>
 
@@ -21,6 +20,7 @@ import NavigationBar from "./components/NavigationBar.vue";
   --color-background-light: hsl(var(--color-base-hue), 100%, 16%);
   --color-text-light: hsl(var(--color-base-hue), 100%, 87%);
 }
+
 
 th,td{
     color: hsl(var(--color-base-hue), 100%, 87%);
@@ -60,5 +60,9 @@ input[type=checkbox][disabled]{
 
     input[type=checkbox]:checked {
     outline:3px solid #EBE645; 
-    } 
+    }
+    
+.clickable {
+  cursor: pointer;
+} 
 </style>

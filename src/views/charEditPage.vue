@@ -1,22 +1,25 @@
 <script setup>
 import { onMounted, reactive,computed } from "vue";
 import DiceRoller from "../components/DiceRoller.vue";
-import {CharacterSheetRepository,BackgroundRepository,CharacterClassRepository,SubraceRepository} from "../lib/repositories.js"
+import {
+  CharacterSheetRepository,BackgroundRepository,CharacterClassRepository,
+  SubraceRepository,FeatRepository,SpellRepository
+} from "../lib/repositories.js"
 const props = defineProps({
         id: Number,
     });
 
 var data = reactive({
-  charlevel:null,
-  charInpriration:null,
-  characterId: null,
+  charlevel:null, // fetched
+  charInpriration:null, // fetched
+  characterId: null, // fetched
   backgrounds: [], //fetched
   selectedBackground: null,// fetched
   selectedClass: null,//fetched
-  selectedClassSkillProfOne: null,
-  selectedClassSkillProfTwo: null,
+  selectedClassSkillProfOne: null, // fetched
+  selectedClassSkillProfTwo: null, // fetched
   races :[], //fetched
-  selectedRace: null,
+  selectedRace: null, // fetched
   charClasses: [], //fetched
   characterName: null,//fetched
   strengthScore: null,//fetched
@@ -26,6 +29,12 @@ var data = reactive({
   wisdomScore: null,//fetched
   charismaScore: null,//fetched
   maxHp:null,//fetched
+  feats:[],//fetched
+  selectedFeats:[],
+  additionalFeat: null,
+  spells:[],
+  selectedSpells:[],
+  additionalSpell: null
 });
 
 // v = virtual
@@ -33,15 +42,37 @@ var data = reactive({
 // ??= if its null the replace it will the value after it
 // computed is a var based on multiple or one variable(s)
 
+const availableFeats = computed(()=>{
+  return data.feats.filter((f)=>{
+
+    return data.selectedFeats.find((x)=>{
+      return x.id == f.id
+    }) === undefined
+
+  })
+  
+})
+
+const availableSpells = computed(()=>{
+  return data.spells.filter((f)=>{
+
+    return data.selectedSpells.find((x)=>{
+      return x.id == f.id
+    }) === undefined
+
+  })
+  
+})
+
 const selectedBackgroundSkillProf = computed(()=>{
   return data.selectedBackground?.skillprof??[]
 })
-
 
 const selectedClassAvailableSkillProfOne = computed(()=>{
   return data.selectedClass?.profSkill??[]
 })
 const selectedClassAvailableSkillProfTwo = computed(()=>{
+  // it got the check because ?? since
   const skillProf = data.selectedClass?.profSkill??[];
   // return with the condition that the id of the second prof is not the same as the first
   return skillProf.filter(x => x.id != data.selectedClassSkillProfOne?.id)
@@ -74,7 +105,7 @@ const isFormDataValid = computed(()=>{
       && data.selectedClass !=null
       && data.selectedRace !=null
       && data.selectedClassSkillProfOne !=null
-      && data.selectedClassSkillProfOne !=null     
+      && data.selectedClassSkillProfOne !=null    
       )
 })
 
@@ -84,6 +115,8 @@ onMounted(async () => {
   data.backgrounds = await BackgroundRepository.getAll();
   data.races = await SubraceRepository.getAll();
   data.charClasses = await CharacterClassRepository.getAll();
+  data.feats = await FeatRepository.getAll();
+  data.spells = await SpellRepository.getAll();
   //.find will FIND the first one that satisfy that condition
   data.selectedBackground = data.backgrounds.find(bg => player.background.id == bg.id);
   data.characterName = player.name;
@@ -101,6 +134,8 @@ onMounted(async () => {
   data.characterId = player.id;
   data.charlevel = player.level;
   data.charInpriration = player.inspiration;
+  data.selectedFeats = player.feats;
+  data.selectedSpells = player.charSpells; 
 });
 
 
@@ -126,9 +161,17 @@ async function saveCharacter(){
       data.selectedClassSkillProfOne.id,
       data.selectedClassSkillProfTwo.id,
       // to "unwind"/concatenate the array below use "..."
+      // the concat can only do as ... while in a array
       ...data.selectedBackground.skillprof.map(x=> x.id)
     ],
-    feats: [],
+    // map(x=> x.id) and the one below is the same thing
+    feats: data.selectedFeats.map((x)=> {
+      return x.id;
+    }),
+    charSpells: data.selectedSpells.map((x)=> {
+      return x.id;
+    })
+    
   };
   try{
     let result = await CharacterSheetRepository.update(savingCharacter);
@@ -138,6 +181,21 @@ async function saveCharacter(){
   }
 }
 
+function deleteChosenFeat(index) {
+   data.selectedFeats.splice(index, 1);
+}
+
+function addNewFeat(){
+  data.selectedFeats.push(data.additionalFeat);
+}
+
+function deleteChosenSpell(index) {
+   data.selectedSpells.splice(index, 1);
+}
+
+function addNewSpell(){
+  data.selectedSpells.push(data.additionalSpell);
+}
 // function showBackgroundSkillProf(){
 //   console.log("selected bg is= ",data.selectedBackground);
 //   console.log("v= ",v);
@@ -178,11 +236,11 @@ async function saveCharacter(){
     <label for="inputCharisma" class="form-label">Charisma</label>
     <input v-model="data.charismaScore" type="number" class="form-control" id="inputCharisma">
   </div>
-  <div class="col-md-3">
+  <div class="col-md-12">
     <label for="inputCharisma" class="form-label">Max hp</label>
     <input v-model="data.maxHp" type="number" class="form-control" id="inputHp">
   </div>
-  <div class="col-md-3">
+  <div class="col-md-4">
     <label for="inputState" class="form-label">Class</label>
     <select id="inputState" class="form-select" v-model="data.selectedClass" >
         <option selected disabled>Choose a Class</option>
@@ -207,7 +265,7 @@ async function saveCharacter(){
     </select>
   </div>
 
-  <div class="col-md-3">
+  <div class="col-md-4">
     <label for="inputState" class="form-label">Race</label>
     <select id="inputState" class="form-select" v-model="data.selectedRace">
         <option selected disabled>Choose a Race</option>
@@ -217,7 +275,7 @@ async function saveCharacter(){
     </select>
   </div>
   <!-- @change="showBackgroundSkillProf()" -->
-  <div class="col-md-3">
+  <div class="col-md-4">
     <label for="inputState" class="form-label">Background</label>
     <select id="inputState" class="form-select" v-model="data.selectedBackground" >
       <option selected disabled>Choose a Background</option>
@@ -229,6 +287,50 @@ async function saveCharacter(){
       <div v-for="bgSkillProf in selectedBackgroundSkillProf" :key="bgSkillProf.skillname">
           {{ bgSkillProf.skillname }}
       </div>
+    
+  </div>
+  <div class="col-md-12">
+    <label for="inputState" class="form-label">
+      Feats ||
+  
+    </label>
+    <span class="btn btn-primary" @click="addNewFeat()">Add</span>
+    <select id="inputState" class="form-select" v-model="data.additionalFeat" >
+      <option selected disabled>Choose a Feat</option>
+      <option v-for="feat in availableFeats" :key="feat.featName" :value="feat">
+            {{ feat.featName }}
+        </option>
+    </select>
+    
+    <div v-for="(chosenFeat,index) in data.selectedFeats" :key="chosenFeat.featName">
+        <div>
+          {{ chosenFeat.featName }}
+        <span class="badge clickable" @click="deleteChosenFeat(index)">Delete</span>
+        </div>
+    </div>
+
+  </div>
+
+   <div class="col-md-12">
+    <label for="inputState" class="form-label">
+      Spells ||
+  
+    </label>
+    <span class="btn btn-primary" @click="addNewSpell()">Add</span>
+    <select id="inputState" class="form-select" v-model="data.additionalSpell" >
+      <option selected disabled>Choose a Spell</option>
+      <option v-for="spell in availableSpells" :key="spell.spName" :value="spell">
+            {{ spell.spName }}
+        </option>
+    </select>
+    
+    <div v-for="(chosenSpell,index) in data.selectedSpells" :key="chosenSpell.spName">
+        <div>
+          {{ chosenSpell.spName }}
+        <span class="badge clickable" @click="deleteChosenSpell(index)">Delete</span>
+        </div>
+    </div>
+
     
   </div>
   <div class="col-12">

@@ -15,6 +15,7 @@ import Feats from "../components/feats.vue";
 import Notes from "../components/notes.vue";
 import Proficienies from "../components/Proficienies.vue";
 import RacialAbilities from "../components/RacialAbilities.vue";
+import PlayerSpell from "../components/PlayerSpell.vue"
 
 var data = reactive({
   player: {},
@@ -139,6 +140,7 @@ async function deleteCharacter() {
         <AbilityScores :player="data.player" />
         <SavingThrow :player="data.player" />
         <Proficienies :player="data.player"/>
+        <Feats :player="data.player"/>
       </div>
 
       <div class="col-3">
@@ -149,7 +151,6 @@ async function deleteCharacter() {
         <AcInitMove :player="data.player" />
         <!-- $event is -->
         <HpBox :player="data.player" @damagingHpEvent="damaging($event)" @healingHpEvent="healing($event)" />
-        <Feats />
         <!-- @saveNoteToCharEvent="updateCharacter()" -->
         <Notes :player="data.player" />
       </div>
@@ -157,6 +158,7 @@ async function deleteCharacter() {
       <div class="col-3">
         <Abilities :player="data.player" />
         <RacialAbilities :player="data.player"/>
+        <PlayerSpell :player="data.player"/>
       </div>
     </div>
   </div>

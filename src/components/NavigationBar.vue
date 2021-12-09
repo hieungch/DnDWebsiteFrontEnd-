@@ -11,7 +11,8 @@
             <li class="header-link"> <router-link to="/classList">Classes</router-link></li>
             <li class="header-link"> <router-link to="/backgroundList">Backgrounds</router-link></li>
             <li class="header-link"> <router-link to="/raceList">Races</router-link></li>
-            <li class="header-link"> <router-link to="/featList">Feats</router-link></li>           
+            <li class="header-link"> <router-link to="/featList">Feats</router-link></li>
+            <li class="header-link"> <router-link to="/spellList">Spells</router-link></li>            
         </ul>
     </nav>
 </header>

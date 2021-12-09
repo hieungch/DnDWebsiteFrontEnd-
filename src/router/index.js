@@ -7,6 +7,7 @@ import racePage from "../views/RacePages.vue";
 import featPage from "../views/FeatPages.vue";
 import charCreationPage from "../views/charCreationPage.vue";
 import charEditPage from "../views/charEditPage.vue";
+import spellPage from "../views/spellPages.vue";
 
 const routes = [
   {
@@ -50,6 +51,11 @@ const routes = [
     component: charEditPage,
     // for id routing
     props: true,
+  },
+  {
+    path: "/spellList",
+    name: "spellPage",
+    component: spellPage,
   },
 ];
 
