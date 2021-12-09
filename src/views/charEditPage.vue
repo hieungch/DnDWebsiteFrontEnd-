@@ -289,7 +289,7 @@ function addNewSpell(){
       </div>
     
   </div>
-  <div class="col-md-12">
+  <div class="col-md-6">
     <label for="inputState" class="form-label">
       Feats ||
   
@@ -311,7 +311,7 @@ function addNewSpell(){
 
   </div>
 
-   <div class="col-md-12">
+   <div class="col-md-6">
     <label for="inputState" class="form-label">
       Spells ||
   

@@ -36,7 +36,7 @@ export const CharacterSheetRepository = {
 
   async create(character) {
     const result = await axios.post(characterSheetEndPoint, character);
-    if (result.status != 200) {
+    if ((result.status = 200)) {
       return result.data;
     }
     throw `request failed with status ${result.status}`;
@@ -224,7 +224,7 @@ export const CharacterNotesRepository = {
 
   async create(note) {
     const result = await axios.post(characterNotesEndPoint, note);
-    if (result.status != 200) {
+    if ((result.status = 200)) {
       return result.data;
     }
     throw `request failed with status ${result.status}`;

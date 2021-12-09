@@ -100,7 +100,15 @@ async function updateCharacter() {
     savingCharacter.background = data.player.background.id;
     savingCharacter.race = data.player.race.id;
     savingCharacter.characterClass = data.player.characterClass.id;
-    savingCharacter.charNotes = data.player.charNotes.id;
+    savingCharacter.feats = data.player.feats.map((x)=> {
+      return x.id;
+    }),
+    savingCharacter.charSpells = data.player.charSpells.map((x)=> {
+      return x.id;
+    });
+    savingCharacter.charNotes = data.player.charNotes.map((x)=> {
+      return x.id;
+    });
     // console.log(savingCharacter);
     await CharacterSheetRepository.update(savingCharacter);
   } catch(err){
@@ -152,7 +160,7 @@ async function deleteCharacter() {
         <!-- $event is -->
         <HpBox :player="data.player" @damagingHpEvent="damaging($event)" @healingHpEvent="healing($event)" />
         <!-- @saveNoteToCharEvent="updateCharacter()" -->
-        <Notes :player="data.player" />
+        <Notes :player="data.player" @saveNoteToCharacter="updateCharacter()" />
       </div>
 
       <div class="col-3">

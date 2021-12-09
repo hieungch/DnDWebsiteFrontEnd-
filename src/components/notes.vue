@@ -4,14 +4,12 @@ import {CharacterNotesRepository,CharacterSheetRepository} from "../lib/reposito
 import {Modal} from "bootstrap";
 
 const props = defineProps({
-    player: Object,
-    id: Number
+    player: Object
 });
 
 var data = reactive({
-    player:{},
-    // notes:[],
-    // allNotes:[],
+    thisPlayer:{},
+    notes:[],
     noteTitle: null,
     noteDescription: null,
 });
@@ -24,18 +22,17 @@ const isNoteDataValid = computed(()=>{
   )
 })
 
-// const emit = defineEmits(["saveNoteToCharacter"]);
+const emit = defineEmits(["saveNoteToCharacter"]);
 
 const addNoteModal = ref(null);
 const noteModal = ref(null);
 const noteTitleName = ref("");
 const noteInfo = ref("");
 
-// onMounted(async () => {
-//   const player = await CharacterSheetRepository.getById(props.id);
-//   data.allNotes = await CharacterNotesRepository.getAll();
-//   data.notes = data.allNotes.find(characNotes => player.charNotes.id == characNotes.id);
-// });
+onMounted(async () => {
+  data.thisPlayer = await CharacterSheetRepository.getById(props.player.id);
+//   console.log("this player is ", data.thisPlayer)
+});
 
 function showCharacterNoteInfo(characterNote){
     noteInfo.value = characterNote.noteDescription;
@@ -54,37 +51,33 @@ async function createNote(){
     noteTitle: data.noteTitle,
     noteDescription: data.noteDescription,
   };
+  
   try{
     await CharacterNotesRepository.create(newNoteData);
+    data.notes = await CharacterNotesRepository.getAll();
+    let latestNote = data.notes[data.notes.length-1];
+    // console.log("this note list has",data.notes)
+    // console.log("this last note has",latestNote)
+
+    let saveNoteToChar = {...data.thisPlayer};
+    console.log("this player is ",saveNoteToChar);
+    saveNoteToChar.background = data.thisPlayer.background.id;
+    saveNoteToChar.race = data.thisPlayer.race.id;
+    saveNoteToChar.characterClass = data.thisPlayer.characterClass.id;
+    saveNoteToChar.feats = data.thisPlayer.feats.map((x)=> {
+      return x.id;
+    }),
+    saveNoteToChar.charSpells = data.thisPlayer.charSpells.map((x)=> {
+      return x.id;
+    });
+    saveNoteToChar.charNotes[saveNoteToChar.charNotes.length-1] = data.thisPlayer.charNotes.push(latestNote.id)
+    // console.log("this note has id", latestNote.id)
+    await CharacterSheetRepository.update(saveNoteToChar);
   } catch(err){
     console.error(err);
-  }
-}
+  };
 
-// async function saveNoteToChar(){
-//   let savingNoteToCharacter ={
-//     charNotes: array.push(data.notes),
-//   };
-//   try{
-//     let result = await CharacterSheetRepository.update(savingNoteToCharacter);
-//     console.log("res=", result)
-//   } catch(err){
-//     console.error(err);
-//   }
-// }
-
-async function saveNoteToCharSheet() {
-  try{
-    let saveNoteToCharacter = {...data.player};
-    saveNoteToCharacter.background = data.player.background.id;
-    saveNoteToCharacter.race = data.player.race.id;
-    saveNoteToCharacter.characterClass = data.player.characterClass.id;
-    saveNoteToCharacter.charNotes = array.push(data.player.charNotes.id);
-    await CharacterSheetRepository.update(saveNoteToCharacter);
-  } catch(err){
-    console.error(err);
-  }
-}
+};
 </script>
 
 <template>
@@ -132,9 +125,14 @@ async function saveNoteToCharSheet() {
                         <label for="title">Note description</label>
                         <textarea v-model="data.noteDescription" name="noteDescription" id="" cols="30" rows="10" placeholder="Enter your note infos"></textarea>
 
-                        <div @click='createNote(); saveNoteToCharSheet();'
+                        <div @click="createNote(); "
                         class="btn btn-primary" type="submit" :disabled="!isNoteDataValid">
                         Add note
+                        </div>
+
+                        <div @click='emit("saveNoteToCharacter")'
+                        class="btn btn-primary" type="submit" :disabled="!isNoteDataValid">
+                        Apply
                         </div>
                     </div>
                 </div>
