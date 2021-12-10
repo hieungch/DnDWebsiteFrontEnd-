@@ -77,9 +77,9 @@ function rollDice() {
   </div>
   <div class="modal" tabindex="-1" id="diceRollerModal">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content  ">
         <!-- header -->
-        <div class="modal-header">
+        <div class="modal-header modal-bg-color">
           <h5 class="modal-title">Dice roller</h5>
           <button
             type="button"
@@ -90,7 +90,7 @@ function rollDice() {
         </div>
 
         <!-- body -->
-        <div class="modal-body">
+        <div class="modal-body modal-bg-color">
           <ul class="list-group">
             <li
               v-for="(item, index) in data.results"
@@ -114,7 +114,7 @@ function rollDice() {
         </div>
 
         <!-- footer -->
-        <div class="modal-footer container">
+        <div class="modal-footer container modal-bg-color">
           <div class="container">
             <div class="row">
               <!-- v-model two way data-binding -->
@@ -217,6 +217,11 @@ function rollDice() {
 </template>
 
 <style>
+
+.modal-bg-color{
+    background-color: rgb(7, 7, 95);
+}
+
 .clickable {
   cursor: pointer;
 }

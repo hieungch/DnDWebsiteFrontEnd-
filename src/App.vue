@@ -21,6 +21,11 @@ import NavigationBar from "./components/NavigationBar.vue";
   --color-text-light: hsl(var(--color-base-hue), 100%, 87%);
 }
 
+.info-table-scroll{
+  overflow:scroll; 
+  height:300px;
+}
+
 
 th,td{
     color: hsl(var(--color-base-hue), 100%, 87%);

@@ -23,7 +23,7 @@ function showAbilityInfo(ability){
         <h3>Abilities</h3>
         
         <!-- things that behind ":" like :key="" will turn the "" from string to statment -->
-            <div class="ability-score-box" >
+            <div class="ability-score-box info-table-scroll" >
                 <div class=" row skill-box "  
                 v-for="ability in player.characterClass.ability" :key="ability.name">
                    <div v-if="player.level >= ability.levelRequirement">

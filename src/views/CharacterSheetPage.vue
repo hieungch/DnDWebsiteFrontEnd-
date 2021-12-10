@@ -160,7 +160,7 @@ async function deleteCharacter() {
         <!-- $event is -->
         <HpBox :player="data.player" @damagingHpEvent="damaging($event)" @healingHpEvent="healing($event)" />
         <!-- @saveNoteToCharEvent="updateCharacter()" -->
-        <Notes :player="data.player" @saveNoteToCharacter="updateCharacter()" />
+        <Notes :player="data.player"/>
       </div>
 
       <div class="col-3">
@@ -184,29 +184,6 @@ async function deleteCharacter() {
 </template>
 
 <style>
-:root {
-  font-size: 20px;
-  color: var(--color-text-light);
-  --color-base-hue: 200;
-  --color-danger-hue-offset: 180;
-  --color-danger-hue: calc(
-    var(--color-base-hue) - var(--color-danger-hue-offset)
-  );
-  --color-background-dark: hsl(var(--color-base-hue), 100%, 8%);
-  --color-background-light: hsl(var(--color-base-hue), 100%, 16%);
-  --color-text-light: hsl(var(--color-base-hue), 100%, 87%);
-
-  --color-btn-primary-background: hsl(var(--color-base-hue), 100%, 83%);
-  --color-btn-primary-background-dark: hsl(var(--color-base-hue), 100%, 73%);
-  --color-btn-primary-text: hsl(var(--color-base-hue), 100%, 20%);
-  --color-btn-primary-text-dark: hsl(var(--color-base-hue), 100%, 10%);
-  --color-btn-border: black;
-  --color-btn-danger-background: hsl(var(--color-danger-hue), 100%, 83%);
-  --color-btn-danger-background-dark: hsl(var(--color-danger-hue), 100%, 73%);
-  --color-btn-danger-text: black;
-  --color-btn-danger-text-dark: black;
-}
-
 .fixed-in-btn {
   color: white;
   position: fixed;

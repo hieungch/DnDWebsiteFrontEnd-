@@ -38,7 +38,7 @@ function showSpellInfo(spellInfos){
 <template>
     <div class="ability-score-field">
             <h3>Spells</h3>
-        <div class="ability-score-box" >
+        <div class="ability-score-box info-table-scroll" >
             <div class=" row skill-box "  
                 v-for="spell in player.charSpells" :key="spell.spName">
                    <div>

@@ -2,9 +2,11 @@
 import { onMounted, reactive,computed } from "vue";
 import DiceRoller from "../components/DiceRoller.vue";
 import {
-  CharacterSheetRepository,BackgroundRepository,CharacterClassRepository,
+  CharacterSheetRepository,BackgroundRepository,
+  CharacterClassRepository,
   SubraceRepository,FeatRepository,SpellRepository
 } from "../lib/repositories.js"
+
 const props = defineProps({
         id: Number,
     });
@@ -30,11 +32,12 @@ var data = reactive({
   charismaScore: null,//fetched
   maxHp:null,//fetched
   feats:[],//fetched
-  selectedFeats:[],
+  selectedFeats:[], //fetched
   additionalFeat: null,
-  spells:[],
-  selectedSpells:[],
-  additionalSpell: null
+  spells:[], //fetched
+  selectedSpells:[], //fetched
+  additionalSpell: null, //fetched
+  notes: []
 });
 
 // v = virtual
@@ -135,7 +138,8 @@ onMounted(async () => {
   data.charlevel = player.level;
   data.charInpriration = player.inspiration;
   data.selectedFeats = player.feats;
-  data.selectedSpells = player.charSpells; 
+  data.selectedSpells = player.charSpells;
+  data.notes = player.charNotes; 
 });
 
 
@@ -170,6 +174,9 @@ async function saveCharacter(){
     }),
     charSpells: data.selectedSpells.map((x)=> {
       return x.id;
+    }),
+    charNotes: data.notes.map((x)=>{
+      return x.id;
     })
     
   };
@@ -196,11 +203,6 @@ function deleteChosenSpell(index) {
 function addNewSpell(){
   data.selectedSpells.push(data.additionalSpell);
 }
-// function showBackgroundSkillProf(){
-//   console.log("selected bg is= ",data.selectedBackground);
-//   console.log("v= ",v);
-// }
-
 </script>
 
 <template>

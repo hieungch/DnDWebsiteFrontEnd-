@@ -22,8 +22,6 @@ const isNoteDataValid = computed(()=>{
   )
 })
 
-const emit = defineEmits(["saveNoteToCharacter"]);
-
 const addNoteModal = ref(null);
 const noteModal = ref(null);
 const noteTitleName = ref("");
@@ -88,7 +86,7 @@ async function createNote(){
             Add notes
         </div>
         </div>
-        <div class="ability-score-box" >
+        <div class="ability-score-box info-table-scroll" >
             <div class=" row skill-box "  
                 v-for="characterNote in player.charNotes" :key="characterNote.id">
                    <div>
@@ -107,10 +105,10 @@ async function createNote(){
 
             <div class="modal" ref="noteModal">
                 <div class="modal-dialog">
-                    <div class="modal-content modal-box-bg">
-                        {{ noteTitleName }}: 
+                    <div class="modal-content modal-box-bg modal-bg-color">
+                        Note Title: {{ noteTitleName }}
                         <div>
-                            {{ noteInfo }} 
+                        Description:    {{ noteInfo }} 
                         </div>
                     </div>
                 </div>
@@ -118,7 +116,7 @@ async function createNote(){
 
             <div class="modal" ref="addNoteModal">
                 <div class="modal-dialog">
-                    <div class="modal-content modal-box-bg">
+                    <div class="modal-content modal-box-bg modal-bg-color">
                         <label for="title">Note title</label>
                         <input v-model="data.noteTitle" type="text" placeholder="Enter your note title">
 
@@ -128,11 +126,6 @@ async function createNote(){
                         <div @click="createNote(); "
                         class="btn btn-primary" type="submit" :disabled="!isNoteDataValid">
                         Add note
-                        </div>
-
-                        <div @click='emit("saveNoteToCharacter")'
-                        class="btn btn-primary" type="submit" :disabled="!isNoteDataValid">
-                        Apply
                         </div>
                     </div>
                 </div>
@@ -144,7 +137,9 @@ async function createNote(){
 </template>
 
 <style scoped lang="scss">
-
+.modal-bg-color{
+    background-color: rgb(7, 7, 95);
+}
 .ability-score-field{
     border-radius: 25px;
     background-color: #000957;

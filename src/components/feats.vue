@@ -24,7 +24,7 @@ function showFeatInfo(featInfos){
 <template>
     <div class="ability-score-field">
             <h3>Feats</h3>
-        <div class="ability-score-box" >
+        <div class="ability-score-box info-table-scroll" >
             <div class=" row skill-box "  
                 v-for="feat in player.feats" :key="feat.featName">
                    <div>
@@ -43,7 +43,7 @@ function showFeatInfo(featInfos){
 
             <div class="modal" ref="featModal">
                     <div class="modal-dialog">
-                        <div class="modal-content modal-box-bg">
+                        <div class="modal-content modal-box-bg modal-bg-color">
                             <div>
                                 Name: {{ featTitle }}
                             </div>
@@ -62,6 +62,10 @@ function showFeatInfo(featInfos){
 </template>
 
 <style scoped lang="scss">
+
+.modal-bg-color{
+    background-color: rgb(7, 7, 95);
+}
 
 h3{
     text-align: center;
