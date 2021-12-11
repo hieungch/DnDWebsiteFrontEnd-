@@ -26,6 +26,21 @@ import NavigationBar from "./components/NavigationBar.vue";
   height:300px;
 }
 
+.fixed-in-btn {
+  color: white;
+  position: fixed;
+  bottom: 3%;
+  right: 3%;
+  background: #0facf3;
+  width: 130px;
+  height: 45px;
+  line-height: 45px;
+  text-align: center;
+  border-radius: 3px;
+  box-shadow: 4px 4px 4px #0a78aa;
+  cursor: pointer;
+}
+
 
 th,td{
     color: hsl(var(--color-base-hue), 100%, 87%);

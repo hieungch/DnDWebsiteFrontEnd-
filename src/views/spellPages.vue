@@ -52,12 +52,13 @@ async function loadAnotherSpell(){
     <SpellInfo :spell="data.spell" @loadAnotherSpell="loadAnotherSpell()"/>
 </div>
 
-<div v-if="!spellIsLoaded">
-  <div>
-    <input v-model="data.searchedSpell" type="text">
+<div class="row g-3" v-if="!spellIsLoaded">
+  <div class="col-12">
+      <label class="form-label">Search</label>
+      <input v-model="data.searchedSpell" class="form-control" type="text" placeholder="Spells">
   </div>
 
-  <div class="box-list content-box-list">
+  <div class=" col-12 box-list content-box-list">
     <div v-for="Spell in searchedSpellList" :key= "Spell.id">
       <button class="btn-list" @click="selectSpell(Spell)">
       {{Spell.spName}}

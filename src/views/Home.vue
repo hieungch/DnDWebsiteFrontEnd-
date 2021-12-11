@@ -11,7 +11,9 @@
       <div>Races's has lore info for roleplay</div>
       <div>Background's has lore info for roleplay</div>
       <div>Feat's contain mini ability you can add to your character</div>
-      <div>New character will direct you to character creation screen</div>
+      <div>Use dice roller to rolls different kind of dices</div>
+      <div>Click on edit button to edit character and add new spell and feats</div>
+      <div>There is a add note button for you to add ur own custom note</div>
   </div>
   <div class="col middle-box">
       <div>HOW TO PLAY </div>
@@ -27,36 +29,15 @@
   </div>
 </div>
 
-
 </template>
 
-
-
 <style lang="scss">
-
-
-
 .middle-box{
   text-align: center;
   background-color: blue;
   border-radius: 25px;
   margin: 10px;
 }
-
-.fixed-in-btn{
-    color: white;
-    position: fixed;
-    bottom: 10%;
-    right: 3%;
-    background: #0FACF3;
-    width: 180px;
-    height: 45px;
-    line-height: 45px;
-    text-align: center;
-    border-radius: 3px;
-    box-shadow: 4px 4px 4px #0a78aa;
-    cursor: pointer;
-  }
 
 body {
   background: linear-gradient(

@@ -1,5 +1,5 @@
 <script setup>
-import {reactive,onMounted,ref} from "vue"
+import {reactive,onMounted,ref,computed} from "vue"
 import {SubraceRepository} from "../lib/repositories.js"
 import RaceInfo from "../components/RaceInfo.vue";
 
@@ -8,9 +8,20 @@ import RaceInfo from "../components/RaceInfo.vue";
 var data = reactive({
   race : {},
   races : [],
+  searchedRace: null,
 });
 
 let raceIsLoaded = ref(false);
+
+const searchedRaceList = computed(()=>{
+  let result = [...data.races??[]]
+  if(data.searchedRace != null){
+    result = result.filter((element)=>{
+      return element.name.toLowerCase().includes(data.searchedRace.toLowerCase()) 
+    })
+  }
+  return result
+})
 
 onMounted( async ()=>{
   if(!raceIsLoaded.value){
@@ -36,9 +47,14 @@ async function loadAnotherRace(){
     <RaceInfo :race="data.race" @loadAnotherRace="loadAnotherRace()"/>
 </div>
 
-<div v-if="!raceIsLoaded">
-  <div class="box-list content-box-list">
-    <div v-for="Race in data.races" :key= "Race .id">
+<div class="row g-3" v-if="!raceIsLoaded">
+  <div class="col-12">
+      <label class="form-label">Search</label>
+      <input v-model="data.searchedRace" class="form-control" type="text" placeholder="Enter race name here">
+  </div>
+
+  <div class="col-12 box-list content-box-list">
+    <div v-for="Race in searchedRaceList" :key= "Race .id">
       <button class="btn-list" @click="selectRace(Race )">{{Race.name}}</button>
     </div>
   </div>

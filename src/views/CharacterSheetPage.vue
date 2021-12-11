@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onMounted, ref } from "vue";
+import { reactive, onMounted, ref,computed } from "vue";
 import { CharacterSheetRepository } from "../lib/repositories.js";
 
 // import components
@@ -20,9 +20,20 @@ import PlayerSpell from "../components/PlayerSpell.vue"
 var data = reactive({
   player: {},
   sheets: [],
+  searchedCharacter: null,
 });
 
 let playerIsLoaded = ref(false);
+
+const searchedCharacterList = computed(()=>{
+  let result = [...data.sheets??[]]
+  if(data.searchedCharacter != null){
+    result = result.filter((element)=>{
+      return element.name.toLowerCase().includes(data.searchedCharacter.toLowerCase())
+    })
+  }
+  return result
+})
 
 onMounted(async () => {
   if (!playerIsLoaded.value) {
@@ -171,11 +182,15 @@ async function deleteCharacter() {
     </div>
   </div>
 
-  <div v-if="!playerIsLoaded">
-    <div class="box-list content-box-list">
-      <div v-for="character in data.sheets" :key="character.id">
+  <div class="row g-3" v-if="!playerIsLoaded">
+    <div class="col-12">
+      <label class="form-label">Search</label>
+      <input v-model="data.searchedCharacter" class="form-control" type="text" placeholder="Feats">
+    </div>
+
+    <div class="col-12 box-list content-box-list">
+      <div v-for="character in searchedCharacterList" :key="character.id">
         <button class="btn-list" @click="selectCharacter(character)">
-          View character
           {{ character.name }}
         </button>
       </div>
@@ -184,20 +199,7 @@ async function deleteCharacter() {
 </template>
 
 <style>
-.fixed-in-btn {
-  color: white;
-  position: fixed;
-  bottom: 10%;
-  right: 3%;
-  background: #0facf3;
-  width: 180px;
-  height: 45px;
-  line-height: 45px;
-  text-align: center;
-  border-radius: 3px;
-  box-shadow: 4px 4px 4px #0a78aa;
-  cursor: pointer;
-}
+
 
 body {
   background: linear-gradient(
