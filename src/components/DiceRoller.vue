@@ -47,7 +47,6 @@ function removeResultItem(index) {
 }
 
 function calculTotal() {
-  // reduce, 
   return data.results.reduce((a, b) => a + b.value + b.mod, 0);
 }
 

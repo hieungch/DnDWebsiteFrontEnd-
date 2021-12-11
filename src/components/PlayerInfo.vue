@@ -4,7 +4,7 @@ const props = defineProps({
         player: Object,
     });
 
-// this is for leveling up
+
 // it can be used many time defineEmits(["","",...])
 const emit = defineEmits([
     "levelUpEvent","loadAnotherChar",

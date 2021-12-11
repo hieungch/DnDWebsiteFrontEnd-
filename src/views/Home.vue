@@ -19,9 +19,9 @@
       <div>HOW TO PLAY </div>
       <div>1. click on the "new character" to begin making a new character</div>
       <div>2. Enter the field as required in the character screen and click create</div>
-      <div>3. You will be moved to the character sheet screen with all your stat displayed</div>
+      <div>3. move to the character page and find your character and click on it will show your data</div>
       <div>
-        4. All of your stat and proficieny will be selected automatically and updated for you wheneven you level up
+        4. All of your stat and proficieny will be selected automatically and updated for you whenever you level up
       </div>
       <div>5. you can level up to see the stat changes and gain new ability as you reach milestone</div>
       <div>6. you can also roll dice with the modifer u see on ur sheets and see the total result</div>

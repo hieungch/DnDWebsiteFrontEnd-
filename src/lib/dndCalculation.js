@@ -19,6 +19,8 @@ export function calculateProficiency(charLevel) {
   return profBonus;
 }
 
+// baisc function to calculate random value between two value
+
 export function getRndInteger(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }

@@ -45,9 +45,7 @@ function getSkillProfs() {
         {{ skill.skillname }} |-->
         {{
           calculateModifier(player[skill.statModifier]) +
-          (getSkillProfs().includes(skill.id)
-            ? calculateProficiency(player.level)
-            : 0)
+          (getSkillProfs().includes(skill.id)? calculateProficiency(player.level): 0)
         }}
         <div>({{ skill.statModifier }})</div>
       </div>

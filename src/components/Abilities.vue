@@ -32,7 +32,6 @@ function showAbilityInfo(ability){
                     </div>
                     
                     <div>
-                        <!-- {{ ability.description }} -->
                        <div class="btn btn-primary" 
                             @click="showAbilityInfo(ability)"
                             > 
